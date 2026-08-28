@@ -5549,10 +5549,57 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
       ['맨', 'man'], ['웬아이워즈유어맨', 'whenIwasyourman'],
       ['나이트피버', 'nightfever'], ['나이트', 'night'], ['피버', 'fever'],
       ['마무쉬', 'mamush'], ['큐티허니', 'cutiehoney'],
-      ['러브어게인', 'loveagain'], ['먼키의발자국', 'monkeyfootprint']
+      ['러브어게인', 'loveagain'], ['먼키의발자국', 'monkeyfootprint'],
+      ['요요', 'yoyo'], ['어어', 'uhuh'],
+      ['카운팅스타', 'countingstar'], ['카운팅', 'counting'], ['스타', 'star'],
+      ['럭키', 'lucky'], ['럭키유', 'luckyyou'],
+      ['크래쉬', 'crash'], ['크래시', 'crash'],
+      ['고잉온', 'goingon'], ['고잉', 'going'], ['온', 'on'],
+      ['인', 'in'], ['인마이로션', 'inmylotion'],
+      ['코튼캔디', 'cottoncandy'], ['코튼', 'cotton'], ['캔디', 'candy'],
+      ['데자뷔', 'dejavu'],
+      ['하트드랍', 'heartdrop'], ['하트드롭', 'heartdrop'],
+      ['러브에코', 'loveecho'],
+      ['헬로xo', 'helloxo'], ['헬로엑스오', 'helloxo'],
+      ['헬로우xo', 'helloxo'], ['헬로우엑스오', 'helloxo'],
+      ['비지보이', 'busyboy'], ['비지', 'busy'], ['보이', 'boy'],
+      ['러너웨이', 'runaway'],
+      ['갈란티스리믹스', 'galantisremix'], ['갈란티스', 'galantis'], ['리믹스', 'remix']
     ];
     function normSearch(str) {
       return (str || '').toLowerCase().replace(/\s+/g, '');
+    }
+    // 트랙리스트에 앨범명 대신 붙는 보조 텍스트를 만든다.
+    // - COVER/FEATURING 앨범이면 "[COVER] 곡명 - " 같은 앞부분과
+    //   ", 먼키의 발자국 Live" 같은 뒤쪽 프로그램/채널명은 빼고
+    //   "원곡: 아티스트" 부분만 뽑아서 보여준다(원곡 표기가 없으면
+    //   기존처럼 전체 문구를 보여준다).
+    // - 그 외(싱글/EP/OST 등) 앨범은 원래대로 앨범 제목을 그대로 보여준다.
+    function getAlbumSuffixForDisplay(album) {
+      if (!album) return '';
+      if (album.type === 'cover' || album.type === 'featuring') {
+        const m = album.title.match(/원곡\s*:\s*([^,]+)/);
+        if (m) return `원곡: ${m[1].trim()}`;
+        // 원곡 표기가 없으면 "[COVER] " 접두사만 제거하고 그대로 보여준다.
+        return album.title.replace(/^\[[^\]]+\]\s*/, '');
+      }
+      return album.title;
+    }
+    // 곡 제목 뒤에 붙어있는 멤버 이름을 " · " 로 시각적으로 분리해서
+    // 보여준다. 예: "그런 일은 리브,미나미,제나" -> "그런 일은 · 리브, 미나미, 제나"
+    // 알려진 멤버 이름 조합으로 끝나는 경우에만 분리하고, 그 외(콜라보
+    // 게스트 등 알 수 없는 이름이 섞인 경우)는 원래 이름을 그대로 둔다.
+    const KNOWN_MEMBER_NAMES = ['리브', '미나미', '제나', '원이', '규빈'];
+    const MEMBER_SUFFIX_RE = new RegExp(
+      '^(.*\\S)\\s+((?:(?:' + KNOWN_MEMBER_NAMES.join('|') + ')\\s*(?:[,X]\\s*)?)+)$'
+    );
+    function formatTrackNameForDisplay(name) {
+      if (!name) return name;
+      const m = name.match(MEMBER_SUFFIX_RE);
+      if (!m) return name;
+      const title = m[1].trim();
+      const members = m[2].trim().replace(/\s*,\s*/g, ', ').replace(/\s*X\s*/g, ' X ').replace(/,\s*$/, '');
+      return `${title} · ${members}`;
     }
     function trackMatchesSearch(item, query) {
       if (!query) return true;
@@ -9721,7 +9768,9 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
         ytIcon.className = 'yt-badge yt-badge-fixed';
       }
       titleSpan.appendChild(document.createTextNode(
-        selectedAlbum ? `${idx + 1}. ${item.track.name}` : `${idx + 1}. ${item.track.name} - ${item.album.title}`
+        selectedAlbum
+          ? `${idx + 1}. ${formatTrackNameForDisplay(item.track.name)}`
+          : `${idx + 1}. ${formatTrackNameForDisplay(item.track.name)} - ${getAlbumSuffixForDisplay(item.album)}`
       ));
 
       marqueeTrack.appendChild(titleSpan);
@@ -9899,7 +9948,7 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
           ytIcon = document.createElement('span');
           ytIcon.className = 'yt-badge yt-badge-fixed';
         }
-        titleSpan.appendChild(document.createTextNode(`${idx + 1}. ${item.track.name}`));
+        titleSpan.appendChild(document.createTextNode(`${idx + 1}. ${formatTrackNameForDisplay(item.track.name)}`));
 
         marqueeTrack.appendChild(titleSpan);
         titleContainer.appendChild(marqueeTrack);
