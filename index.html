@@ -805,7 +805,8 @@
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
     }
 
-    body.light-mode .album-card-item:hover {
+    body.light-mode .album-card-item:hover,
+    body.light-mode .album-card-item.selected {
       border-width: 3px !important;
       border-color: #7C3AED !important;
       background: rgba(124, 58, 237, 0.18) !important;
@@ -1042,9 +1043,10 @@
     }
 
     .album-card-item.selected {
-      border-color: #01ACCE;
-      background: rgba(1, 172, 206, 0.3);
-      box-shadow: 0 0 12px rgba(1, 172, 206, 0.5);
+      border-width: 3px;
+      border-color: rgba(252, 111, 207, 0.7);
+      background: rgba(252, 111, 207, 0.15);
+      box-shadow: 0 0 12px rgba(252, 111, 207, 0.5);
     }
 
     #panel-category, #panel-album, #panel-tracklist {
@@ -4422,30 +4424,66 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
         ]
       },
       {
-        id: "into-the-new-world-cover",
+        id: "cover-byeolbang-2",
         type: "cover",
-        title: "[COVER] 다시 만난 세계 (Into The New World) - 원곡: 소녀시대",
-        cover: "https://img.youtube.com/vi/G-1Nc7tTJns/hqdefault.jpg",
+        title: "[COVER] 별이 부르는 방에(별방) 커버 - Deja Vu 외 1곡",
+        cover: "https://img.youtube.com/vi/fCTkmJ_rWLo/hqdefault.jpg",
         tracks: [
-          { name: "다시 만난 세계 Into The New World", src: "G-1Nc7tTJns", duration: "3:03", trimEnd: 183 }
+          { name: "Deja Vu - 별이 부르는 방에 별방", src: "fCTkmJ_rWLo", duration: "3:04", trimEnd: 184 },
+          { name: "Runaway(Acoustic Ver) - 별이 부르는 방에 별방", src: "fCTkmJ_rWLo", duration: "3:23", trimStart: 185, trimEnd: 388 }
         ]
       },
       {
-        id: "as-if-its-your-last-cover",
+        id: "cover-byeolbang-1",
         type: "cover",
-        title: "[COVER] 마지막처럼 - 원곡: BLACKPINK",
-        cover: "https://img.youtube.com/vi/rVPh9-CtmiA/hqdefault.jpg",
+        title: "[COVER] 별이 부르는 방에(별방) 커버 - Glow Up 외 3곡",
+        cover: "https://img.youtube.com/vi/zgFQ03jXaIo/hqdefault.jpg",
         tracks: [
-          { name: "마지막처럼", src: "rVPh9-CtmiA", duration: "3:31", trimEnd: 211 }
+          { name: "Glow Up - 별이 부르는 방에 별방", src: "zgFQ03jXaIo", duration: "2:47", trimStart: 1507, trimEnd: 1674 },
+          { name: "Mood - 별이 부르는 방에 별방", src: "zgFQ03jXaIo", duration: "3:04", trimStart: 1937, trimEnd: 2121 },
+          { name: "In my lotion - 별이 부르는 방에 별방", src: "zgFQ03jXaIo", duration: "3:37", trimStart: 2211, trimEnd: 2428 },
+          { name: "Love Attack - 별이 부르는 방에 별방", src: "zgFQ03jXaIo", duration: "2:48", trimStart: 2497, trimEnd: 2665 }
         ]
       },
       {
-        id: "overdose-cover",
+        id: "decalcomanie-cover",
         type: "cover",
-        title: "[COVER] 중독 (Overdose) - 원곡: EXO",
-        cover: "https://img.youtube.com/vi/HVsMGlboV_s/hqdefault.jpg",
+        title: "[COVER] Decalcomanie (데칼코마니) - 원곡: MAMAMOO",
+        cover: "https://img.youtube.com/vi/_zTSCOy5iFc/hqdefault.jpg",
         tracks: [
-          { name: "중독 Overdose", src: "HVsMGlboV_s", duration: "3:27", trimEnd: 207 }
+          { name: "Decalcomanie 데칼코마니", src: "_zTSCOy5iFc", duration: "3:18", trimStart: 517, trimEnd: 715 }
+        ]
+      },
+      {
+        id: "cover-monkey-live",
+        type: "cover",
+        title: "[COVER] 먼키의 발자국 Live 커버 모음 (24곡)",
+        cover: "https://img.youtube.com/vi/qr6_VLHZ7ik/hqdefault.jpg",
+        tracks: [
+          { name: "LOVE ATTACK (Acoustic Ver.) - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "2:45", trimEnd: 165.3 },
+          { name: "Pinball - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "1:06", trimStart: 165.3, trimEnd: 231 },
+          { name: "Glow Up - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "0:54", trimStart: 231, trimEnd: 285 },
+          { name: "Deja Vu - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "2:00", trimStart: 285, trimEnd: 405 },
+          { name: "Pretty Girl - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "2:32", trimStart: 405, trimEnd: 557 },
+          { name: "晩餐歌(만찬가) 먼데이 키즈 X 미나미 원곡:tuki. - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "3:35", trimStart: 557, trimEnd: 772 },
+          { name: "MVP 미나미 - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "0:24", trimStart: 772, trimEnd: 796 },
+          { name: "Bloom 리브 - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "0:20", trimStart: 796, trimEnd: 816 },
+          { name: "New World 제나 - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "0:19", trimStart: 816, trimEnd: 835.2 },
+          { name: "눈의 꽃(雪の華) 미나미 원곡:나카시마 미카 - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "0:48", trimStart: 835.3, trimEnd: 883 },
+          { name: "안녕 (Hello) 리브 원곡:박혜경,조이 - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "0:29", trimStart: 883, trimEnd: 912 },
+          { name: "밤이 되니까 제나 원곡:펀치 - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "0:22", trimStart: 912, trimEnd: 934 },
+          { name: "Roller Coaster 미나미 원곡:청하 - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "0:31", trimStart: 934.2, trimEnd: 965 },
+          { name: "하늘 아래서 리브 원곡:여자친구 - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "0:18", trimStart: 965, trimEnd: 983 },
+          { name: "아니길 (Hope Not) 제나 원곡:BLACKPINK - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "0:34", trimStart: 983.3, trimEnd: 1017 },
+          { name: "Attention 미나미 원곡:Charlie Puth(찰리 푸스) - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "0:40", trimStart: 1017, trimEnd: 1057 },
+          { name: "날 위한 이별 리브 원곡:김혜림,디아 - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "0:35", trimStart: 1057, trimEnd: 1092 },
+          { name: "봄 내음보다 너를 원곡:김나영 - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "0:33", trimStart: 1092, trimEnd: 1125.2 },
+          { name: "영원한 사랑 리브 원곡:핑클(Fin.K.L) - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "0:31", trimStart: 1126, trimEnd: 1157.2 },
+          { name: "When I Was Your Man 미나미 원곡:Bruno Mars(브루노 마스) - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "0:27", trimStart: 1157.25, trimEnd: 1184 },
+          { name: "Hello 리브 원곡:허각 - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "0:33", trimStart: 1184, trimEnd: 1217 },
+          { name: "저 별 제나 원곡:dori(도리) - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "0:34", trimStart: 1217, trimEnd: 1251 },
+          { name: "운명 리브 X 미나미 원곡:먼데이키즈 with 이이경 - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "0:53", trimStart: 1251, trimEnd: 1304 },
+          { name: "만약에 제나 원곡:태연 - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "0:00", trimStart: 1304.4 }
         ]
       },
       {
@@ -4458,30 +4496,130 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
         ]
       },
       {
-        id: "cover-dryflower",
+        id: "cover-minami-solo-1",
         type: "cover",
-        title: "[COVER] Dry Flower - 원곡: Yuuri",
-        cover: "https://img.youtube.com/vi/i0UW8-8UCvc/hqdefault.jpg",
+        title: "[COVER] 미나미 솔로 커버 모음 - Still With You 외 2곡",
+        cover: "https://img.youtube.com/vi/cGB-3ZQoUsA/hqdefault.jpg",
         tracks: [
-          { name: "Dry Flower 미나미", src: "i0UW8-8UCvc", duration: "3:15", trimStart: 4, trimEnd: 199 }
+          { name: "Still With You 미나미 원곡:정국", src: "cGB-3ZQoUsA", duration: "2:03", trimStart: 27, trimEnd: 150 },
+          { name: "JANE DOE 미나미 원곡:요네즈 켄시,우타다 히카루", src: "cGB-3ZQoUsA", duration: "1:44", trimStart: 219, trimEnd: 323 },
+          { name: "Square 미나미 원곡:백예린", src: "cGB-3ZQoUsA", duration: "1:28", trimStart: 388, trimEnd: 476 }
         ]
       },
       {
-        id: "dejavu-acoustic-live-mix-cover",
+        id: "cover-namjachingu",
         type: "cover",
-        title: "[COVER] Deja Vu (Acoustic Live Mix ver.)",
-        cover: "https://img.youtube.com/vi/Rrt8F_72ztE/hqdefault.jpg",
+        title: "[COVER] 내 남자친구에게 - 원곡: 핑클(Fin.K.L)",
+        cover: "https://img.youtube.com/vi/O0BVlom5poY/hqdefault.jpg",
         tracks: [
-          { name: "Deja Vu Acoustic Live Mix ver.", src: "Rrt8F_72ztE", duration: "3:04", trimStart: 0, trimEnd: 184 }
+          { name: "내 남자친구에게 리브", src: "O0BVlom5poY", duration: "2:43" }
         ]
       },
       {
-        id: "cover-kkotgil",
+        id: "cover-minami-solo-2",
         type: "cover",
-        title: "[COVER] 꽃길 - 원곡: 김세정",
-        cover: "https://img.youtube.com/vi/FzUeh7XBOmI/hqdefault.jpg",
+        title: "[COVER] 미나미 솔로 커버 모음 - 나였으면 외 3곡",
+        cover: "https://img.youtube.com/vi/SW7M6MdlrlU/hqdefault.jpg",
         tracks: [
-          { name: "꽃길 규빈 X 미나미", src: "FzUeh7XBOmI", duration: "4:09" }
+          { name: "나였으면 미나미 원곡:나윤권", src: "SW7M6MdlrlU", duration: "4:22", trimStart: 368, trimEnd: 630 },
+          { name: "Bambi 미나미 원곡:백현(르세라핌 채원 ver)", src: "SW7M6MdlrlU", duration: "1:20", trimStart: 991, trimEnd: 1071 },
+          { name: "My Gospel 미나미 원곡:찰리 푸스", src: "SW7M6MdlrlU", duration: "3:02", trimStart: 1198, trimEnd: 1380 },
+          { name: "Timeless 미나미 X 이무진 원곡:장리인(Feat. 시아준수)", src: "SW7M6MdlrlU", duration: "3:38", trimStart: 1840, trimEnd: 2058 }
+        ]
+      },
+      {
+        id: "cover-neujeunhuhoe",
+        type: "cover",
+        title: "[COVER] 늦은 후회 - 원곡: 보보",
+        cover: "https://img.youtube.com/vi/oaPTaoYn_nQ/hqdefault.jpg",
+        tracks: [
+          { name: "늦은 후회 원이", src: "oaPTaoYn_nQ", duration: "2:36", trimStart: 5017, trimEnd: 5173 }
+        ]
+      },
+      {
+        id: "cover-runaway-yeppeosseo",
+        type: "cover",
+        title: "[COVER] Runaway · 예뻤어 - 리브,미나미,제나",
+        cover: "https://img.youtube.com/vi/npwNcBPw7rg/hqdefault.jpg",
+        tracks: [
+          { name: "Runaway 리브,미나미,제나", src: "npwNcBPw7rg", duration: "3:01", trimStart: 106.1, trimEnd: 288 },
+          { name: "예뻤어 리브,미나미,제나 원곡:DAY6", src: "npwNcBPw7rg", duration: "4:34", trimStart: 363, trimEnd: 637 }
+        ]
+      },
+      {
+        id: "cover-galsurent-medley",
+        type: "cover",
+        title: "[COVER] 갸루 라이브 메들리 커버 모음 (5곡)",
+        cover: "https://img.youtube.com/vi/FcMaC8akSU8/hqdefault.jpg",
+        tracks: [
+          { name: "Mamush 미나미 - 갸루 라이브 메들리", src: "FcMaC8akSU8", duration: "1:26", trimStart: 61, trimEnd: 147 },
+          { name: "루카루카★나이트 피버 미나미 - 갸루 라이브 메들리", src: "FcMaC8akSU8", duration: "1:30", trimStart: 147, trimEnd: 237 },
+          { name: "Love again 미나미 - 갸루 라이브 메들리 · 불량연애 OST", src: "FcMaC8akSU8", duration: "1:08", trimStart: 241, trimEnd: 309 },
+          { name: "Cutie honey 미나미 - 갸루 라이브 메들리", src: "FcMaC8akSU8", duration: "0:42", trimStart: 310, trimEnd: 352 },
+          { name: "Mister 미나미 원곡:카라 - 갸루 라이브 메들리", src: "FcMaC8akSU8", duration: "1:15", trimStart: 388, trimEnd: 463 }
+        ]
+      },
+      {
+        id: "cover-byeolbang-3",
+        type: "cover",
+        title: "[COVER] 별방(별이 부르는 방에) 커버 모음 (7곡)",
+        cover: "https://img.youtube.com/vi/waTiGXeIRJE/hqdefault.jpg",
+        tracks: [
+          { name: "봄날 리브,미나미,제나 원곡:BTS - 별방", src: "waTiGXeIRJE", duration: "3:11", trimStart: 219, trimEnd: 410 },
+          { name: "달리기 리브,제나 원곡:옥상달빛 - 별방", src: "waTiGXeIRJE", duration: "2:15", trimStart: 565, trimEnd: 700 },
+          { name: "Stuck With U 리브,미나미 원곡:Ariana Grande,Justin Bieber - 별방", src: "waTiGXeIRJE", duration: "2:00", trimStart: 750, trimEnd: 870 },
+          { name: "number one girl 미나미 원곡:로제(ROSÉ) - 별방", src: "waTiGXeIRJE", duration: "2:24", trimStart: 941, trimEnd: 1085 },
+          { name: "숨 제나 원곡:민니(MINNIE) - 별방", src: "waTiGXeIRJE", duration: "2:32", trimStart: 1112, trimEnd: 1264 },
+          { name: "잊어버리지마 미나미,제나 원곡:Crush(feat. 태연) - 별방", src: "waTiGXeIRJE", duration: "2:10", trimStart: 1295, trimEnd: 1425 },
+          { name: "자장가 리브 원곡:아이유(IU) - 별방", src: "waTiGXeIRJE", duration: "2:31", trimStart: 1447, trimEnd: 1598 }
+        ]
+      },
+      {
+        id: "cover-sadsong",
+        type: "cover",
+        title: "[COVER] Sad Song - 원곡: ちゃんみな(챤미나)",
+        cover: "https://img.youtube.com/vi/FUhkv2YZxnc/hqdefault.jpg",
+        tracks: [
+          { name: "Sad Song RESCENE", src: "FUhkv2YZxnc", duration: "4:44" }
+        ]
+      },
+      {
+        id: "cover-losingyou",
+        type: "cover",
+        title: "[COVER] Losing You - 원곡: FLO",
+        cover: "https://img.youtube.com/vi/nBWg9eWMbfc/hqdefault.jpg",
+        tracks: [
+          { name: "Losing You 미나미 X JUSTICEBACTERIA", src: "nBWg9eWMbfc", duration: "2:43" }
+        ]
+      },
+      {
+        id: "cover-minami-rescene",
+        type: "cover",
+        title: "[COVER] 미나미 RESCENE 자작곡 커버 모음 - Love Echo 외 2곡",
+        cover: "https://img.youtube.com/vi/otmyfnOeolo/hqdefault.jpg",
+        tracks: [
+          { name: "Love Echo 미나미", src: "otmyfnOeolo", duration: "1:14", trimStart: 35, trimEnd: 109 },
+          { name: "MVP 미나미", src: "otmyfnOeolo", duration: "1:14", trimStart: 110, trimEnd: 184 },
+          { name: "Bloom 미나미", src: "otmyfnOeolo", duration: "2:53", trimStart: 202, trimEnd: 375 }
+        ]
+      },
+      {
+        id: "cover-titanium",
+        type: "cover",
+        title: "[COVER] TITANIUM - 원곡: David Guetta",
+        cover: "https://img.youtube.com/vi/AhJb7wPiOjQ/hqdefault.jpg",
+        tracks: [
+          { name: "TITANIUM 미나미", src: "AhJb7wPiOjQ", duration: "0:00" }
+        ]
+      },
+      {
+        id: "overdose-cover",
+        type: "cover",
+        title: "[COVER] 중독 (Overdose) - 원곡: EXO",
+        cover: "https://img.youtube.com/vi/HVsMGlboV_s/hqdefault.jpg",
+        tracks: [
+          { name: "중독 Overdose", src: "HVsMGlboV_s", duration: "3:27", trimEnd: 207 },
+          { name: "중독 Overdose (ver.2)", src: "e8CfO3CwiGI", duration: "3:27" }
         ]
       },
       {
@@ -4491,33 +4629,6 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
         cover: "https://img.youtube.com/vi/TucLh-PYwwE/hqdefault.jpg",
         tracks: [
           { name: "HAPPY 규빈 X 미나미", src: "TucLh-PYwwE", duration: "3:09" }
-        ]
-      },
-      {
-        id: "cover-runaway-live",
-        type: "cover",
-        title: "[COVER] Runaway - 리브,미나미,제나",
-        cover: "https://img.youtube.com/vi/npwNcBPw7rg/hqdefault.jpg",
-        tracks: [
-          { name: "Runaway 리브,미나미,제나", src: "npwNcBPw7rg", duration: "3:01", trimStart: 106.10, trimEnd: 288.00 }
-        ]
-      },
-      {
-        id: "cover-yeppeosseo",
-        type: "cover",
-        title: "[COVER] 예뻤어 - 원곡: DAY6",
-        cover: "https://img.youtube.com/vi/npwNcBPw7rg/hqdefault.jpg",
-        tracks: [
-          { name: "예뻤어 리브,미나미,제나", src: "npwNcBPw7rg", duration: "4:34", trimStart: 363, trimEnd: 637 }
-        ]
-      },
-      {
-        id: "cover-lifestooshort",
-        type: "cover",
-        title: "[COVER] Life's Too Short - 원곡: aespa",
-        cover: "https://img.youtube.com/vi/OybCC65kqEw/hqdefault.jpg",
-        tracks: [
-          { name: "Life's Too Short 제나", src: "OybCC65kqEw", duration: "1:12" }
         ]
       },
       {
@@ -4539,183 +4650,12 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
         ]
       },
       {
-        id: "cover-underneath",
+        id: "dejavu-acoustic-live-mix-cover",
         type: "cover",
-        title: "[COVER] Underneath the Tree Special Live - 원곡: Kelly Clarkson",
-        cover: "https://img.youtube.com/vi/Ocby704Ou-E/hqdefault.jpg",
+        title: "[COVER] Deja Vu (Acoustic Live Mix ver.)",
+        cover: "https://img.youtube.com/vi/Rrt8F_72ztE/hqdefault.jpg",
         tracks: [
-          { name: "Underneath the Tree Special Live RESCENE", src: "Ocby704Ou-E", duration: "0:00" }
-        ]
-      },
-      {
-        id: "cover-titanium",
-        type: "cover",
-        title: "[COVER] TITANIUM - 원곡: David Guetta",
-        cover: "https://img.youtube.com/vi/AhJb7wPiOjQ/hqdefault.jpg",
-        tracks: [
-          { name: "TITANIUM 미나미", src: "AhJb7wPiOjQ", duration: "0:00" }
-        ]
-      },
-      {
-        id: "cover-losingyou",
-        type: "cover",
-        title: "[COVER] Losing You - 원곡: FLO",
-        cover: "https://img.youtube.com/vi/nBWg9eWMbfc/hqdefault.jpg",
-        tracks: [
-          { name: "Losing You 미나미 X JUSTICEBACTERIA", src: "nBWg9eWMbfc", duration: "2:43" }
-        ]
-      },
-      {
-        id: "cover-namjachingu",
-        type: "cover",
-        title: "[COVER] 내 남자친구에게 - 원곡: 핑클(Fin.K.L)",
-        cover: "https://img.youtube.com/vi/O0BVlom5poY/hqdefault.jpg",
-        tracks: [
-          { name: "내 남자친구에게 리브", src: "O0BVlom5poY", duration: "2:43" }
-        ]
-      },
-      {
-        id: "cover-nawasseumyeon",
-        type: "cover",
-        title: "[COVER] 나였으면 - 원곡: 나윤권",
-        cover: "https://img.youtube.com/vi/SW7M6MdlrlU/hqdefault.jpg",
-        tracks: [
-          { name: "나였으면 미나미", src: "SW7M6MdlrlU", duration: "4:22", trimStart: 368, trimEnd: 630 }
-        ]
-      },
-      {
-        id: "cover-bambi",
-        type: "cover",
-        title: "[COVER] Bambi (르세라핌 채원 ver) - 원곡: 백현",
-        cover: "https://img.youtube.com/vi/SW7M6MdlrlU/hqdefault.jpg",
-        tracks: [
-          { name: "Bambi 미나미", src: "SW7M6MdlrlU", duration: "1:20", trimStart: 991, trimEnd: 1071 }
-        ]
-      },
-      {
-        id: "cover-mygospel",
-        type: "cover",
-        title: "[COVER] My Gospel - 원곡: 찰리 푸스",
-        cover: "https://img.youtube.com/vi/SW7M6MdlrlU/hqdefault.jpg",
-        tracks: [
-          { name: "My Gospel 미나미", src: "SW7M6MdlrlU", duration: "3:02", trimStart: 1198, trimEnd: 1380 }
-        ]
-      },
-      {
-        id: "cover-timeless",
-        type: "cover",
-        title: "[COVER] Timeless - 원곡: 장리인 (Feat. 시아준수)",
-        cover: "https://img.youtube.com/vi/SW7M6MdlrlU/hqdefault.jpg",
-        tracks: [
-          { name: "Timeless 미나미 X 이무진", src: "SW7M6MdlrlU", duration: "3:38", trimStart: 1840, trimEnd: 2058 }
-        ]
-      },
-      {
-        id: "cover-geureonirun",
-        type: "cover",
-        title: "[COVER] 그런 일은 - 원곡: 박화요비",
-        cover: "https://img.youtube.com/vi/iLcyx5g3_j8/hqdefault.jpg",
-        tracks: [
-          { name: "그런 일은 리브,미나미,제나", src: "iLcyx5g3_j8", duration: "4:05" }
-        ]
-      },
-      {
-        id: "cover-eunggeupsil",
-        type: "cover",
-        title: "[COVER] 응급실 - 원곡: izi(이지)",
-        cover: "https://img.youtube.com/vi/ivwkXESUkas/hqdefault.jpg",
-        tracks: [
-          { name: "응급실 리브,미나미,제나", src: "ivwkXESUkas", duration: "3:14" }
-        ]
-      },
-      {
-        id: "cover-bomnal",
-        type: "cover",
-        title: "[COVER] 봄날 - 원곡: BTS (별방)",
-        cover: "https://img.youtube.com/vi/waTiGXeIRJE/hqdefault.jpg",
-        tracks: [
-          { name: "봄날 리브,미나미,제나", src: "waTiGXeIRJE", duration: "3:11", trimStart: 219, trimEnd: 410 }
-        ]
-      },
-      {
-        id: "cover-dalligi",
-        type: "cover",
-        title: "[COVER] 달리기 - 원곡: 옥상달빛 (별방)",
-        cover: "https://img.youtube.com/vi/waTiGXeIRJE/hqdefault.jpg",
-        tracks: [
-          { name: "달리기 리브,제나", src: "waTiGXeIRJE", duration: "2:15", trimStart: 565, trimEnd: 700 }
-        ]
-      },
-      {
-        id: "cover-stuckwithu",
-        type: "cover",
-        title: "[COVER] Stuck With U - 원곡: Ariana Grande, Justin Bieber (별방)",
-        cover: "https://img.youtube.com/vi/waTiGXeIRJE/hqdefault.jpg",
-        tracks: [
-          { name: "Stuck With U 리브,미나미", src: "waTiGXeIRJE", duration: "2:00", trimStart: 750, trimEnd: 870 }
-        ]
-      },
-      {
-        id: "cover-numberonegirl",
-        type: "cover",
-        title: "[COVER] number one girl - 원곡: 로제(ROSÉ) (별방)",
-        cover: "https://img.youtube.com/vi/waTiGXeIRJE/hqdefault.jpg",
-        tracks: [
-          { name: "number one girl 미나미", src: "waTiGXeIRJE", duration: "2:24", trimStart: 941, trimEnd: 1085 }
-        ]
-      },
-      {
-        id: "cover-sum",
-        type: "cover",
-        title: "[COVER] 숨 - 원곡: 민니(MINNIE) (별방)",
-        cover: "https://img.youtube.com/vi/waTiGXeIRJE/hqdefault.jpg",
-        tracks: [
-          { name: "숨 제나", src: "waTiGXeIRJE", duration: "2:32", trimStart: 1112, trimEnd: 1264 }
-        ]
-      },
-      {
-        id: "cover-ijeobeorijima",
-        type: "cover",
-        title: "[COVER] 잊어버리지마 - 원곡: Crush (feat. 태연) (별방)",
-        cover: "https://img.youtube.com/vi/waTiGXeIRJE/hqdefault.jpg",
-        tracks: [
-          { name: "잊어버리지마 미나미,제나", src: "waTiGXeIRJE", duration: "2:10", trimStart: 1295, trimEnd: 1425 }
-        ]
-      },
-      {
-        id: "cover-jajangga",
-        type: "cover",
-        title: "[COVER] 자장가 - 원곡: 아이유(IU) (별방)",
-        cover: "https://img.youtube.com/vi/waTiGXeIRJE/hqdefault.jpg",
-        tracks: [
-          { name: "자장가 리브", src: "waTiGXeIRJE", duration: "2:31", trimStart: 1447, trimEnd: 1598 }
-        ]
-      },
-      {
-        id: "cover-diewithasmile",
-        type: "cover",
-        title: "[COVER] Die with a Smile - 원곡: Lady Gaga & Bruno Mars",
-        cover: "https://img.youtube.com/vi/J_YUy-C-7ds/hqdefault.jpg",
-        tracks: [
-          { name: "Die with a Smile 리브,미나미,제나", src: "J_YUy-C-7ds", duration: "3:54" }
-        ]
-      },
-      {
-        id: "cover-sadsong",
-        type: "cover",
-        title: "[COVER] Sad Song - 원곡: ちゃんみな(챤미나)",
-        cover: "https://img.youtube.com/vi/FUhkv2YZxnc/hqdefault.jpg",
-        tracks: [
-          { name: "Sad Song RESCENE", src: "FUhkv2YZxnc", duration: "4:44" }
-        ]
-      },
-      {
-        id: "cover-neujeunhuhoe",
-        type: "cover",
-        title: "[COVER] 늦은 후회 - 원곡: 보보",
-        cover: "https://img.youtube.com/vi/oaPTaoYn_nQ/hqdefault.jpg",
-        tracks: [
-          { name: "늦은 후회 원이", src: "oaPTaoYn_nQ", duration: "2:36", trimStart: 5017, trimEnd: 5173 }
+          { name: "Deja Vu Acoustic Live Mix ver.", src: "Rrt8F_72ztE", duration: "3:04", trimEnd: 184 }
         ]
       },
       {
@@ -4728,12 +4668,75 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
         ]
       },
       {
-        id: "decalcomanie-cover",
+        id: "cover-kkotgil",
         type: "cover",
-        title: "[COVER] Decalcomanie (데칼코마니) - 원곡: MAMAMOO",
-        cover: "https://img.youtube.com/vi/_zTSCOy5iFc/hqdefault.jpg",
+        title: "[COVER] 꽃길 - 원곡: 김세정",
+        cover: "https://img.youtube.com/vi/FzUeh7XBOmI/hqdefault.jpg",
         tracks: [
-          { name: "Decalcomanie 데칼코마니", src: "_zTSCOy5iFc", duration: "3:18", trimStart: 517, trimEnd: 715 }
+          { name: "꽃길 규빈 X 미나미", src: "FzUeh7XBOmI", duration: "4:09" }
+        ]
+      },
+      {
+        id: "as-if-its-your-last-cover",
+        type: "cover",
+        title: "[COVER] 마지막처럼 - 원곡: BLACKPINK",
+        cover: "https://img.youtube.com/vi/rVPh9-CtmiA/hqdefault.jpg",
+        tracks: [
+          { name: "마지막처럼", src: "rVPh9-CtmiA", duration: "3:31", trimEnd: 211 }
+        ]
+      },
+      {
+        id: "cover-lifestooshort",
+        type: "cover",
+        title: "[COVER] Life's Too Short - 원곡: aespa",
+        cover: "https://img.youtube.com/vi/OybCC65kqEw/hqdefault.jpg",
+        tracks: [
+          { name: "Life's Too Short 제나", src: "OybCC65kqEw", duration: "1:12" }
+        ]
+      },
+      {
+        id: "cover-dryflower",
+        type: "cover",
+        title: "[COVER] Dry Flower - 원곡: Yuuri",
+        cover: "https://img.youtube.com/vi/i0UW8-8UCvc/hqdefault.jpg",
+        tracks: [
+          { name: "Dry Flower 미나미", src: "i0UW8-8UCvc", duration: "3:15", trimStart: 4, trimEnd: 199 }
+        ]
+      },
+      {
+        id: "into-the-new-world-cover",
+        type: "cover",
+        title: "[COVER] 다시 만난 세계 (Into The New World) - 원곡: 소녀시대",
+        cover: "https://img.youtube.com/vi/G-1Nc7tTJns/hqdefault.jpg",
+        tracks: [
+          { name: "다시 만난 세계 Into The New World", src: "G-1Nc7tTJns", duration: "3:03", trimEnd: 183 }
+        ]
+      },
+      {
+        id: "cover-eunggeupsil",
+        type: "cover",
+        title: "[COVER] 응급실 - 원곡: izi(이지)",
+        cover: "https://img.youtube.com/vi/ivwkXESUkas/hqdefault.jpg",
+        tracks: [
+          { name: "응급실 리브,미나미,제나", src: "ivwkXESUkas", duration: "3:14" }
+        ]
+      },
+      {
+        id: "cover-geureonirun",
+        type: "cover",
+        title: "[COVER] 그런 일은 - 원곡: 박화요비",
+        cover: "https://img.youtube.com/vi/iLcyx5g3_j8/hqdefault.jpg",
+        tracks: [
+          { name: "그런 일은 리브,미나미,제나", src: "iLcyx5g3_j8", duration: "4:05" }
+        ]
+      },
+      {
+        id: "cover-diewithasmile",
+        type: "cover",
+        title: "[COVER] Die with a Smile - 원곡: Lady Gaga & Bruno Mars",
+        cover: "https://img.youtube.com/vi/J_YUy-C-7ds/hqdefault.jpg",
+        tracks: [
+          { name: "Die with a Smile 리브,미나미,제나", src: "J_YUy-C-7ds", duration: "3:54" }
         ]
       },
       {
@@ -4746,377 +4749,26 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
         ]
       },
       {
-        id: "cover-glowup-byeolbang",
+        id: "cover-underneath",
         type: "cover",
-        title: "[COVER] Glow Up - 원곡: RESCENE, 별이 부르는 방에 (별방)",
-        cover: "https://img.youtube.com/vi/zgFQ03jXaIo/hqdefault.jpg",
+        title: "[COVER] Underneath the Tree Special Live - 원곡: Kelly Clarkson",
+        cover: "https://img.youtube.com/vi/Ocby704Ou-E/hqdefault.jpg",
         tracks: [
-          { name: "Glow Up - 별이 부르는 방에 별방", src: "zgFQ03jXaIo", duration: "2:47", trimStart: 1507, trimEnd: 1674 }
-        ]
-      },
-      {
-        id: "cover-mood-byeolbang",
-        type: "cover",
-        title: "[COVER] Mood - 원곡: RESCENE, 별이 부르는 방에 (별방)",
-        cover: "https://img.youtube.com/vi/zgFQ03jXaIo/hqdefault.jpg",
-        tracks: [
-          { name: "Mood - 별이 부르는 방에 별방", src: "zgFQ03jXaIo", duration: "3:04", trimStart: 1937, trimEnd: 2121 }
-        ]
-      },
-      {
-        id: "cover-inmylotion-byeolbang",
-        type: "cover",
-        title: "[COVER] In my lotion - 원곡: RESCENE, 별이 부르는 방에 (별방)",
-        cover: "https://img.youtube.com/vi/zgFQ03jXaIo/hqdefault.jpg",
-        tracks: [
-          { name: "In my lotion - 별이 부르는 방에 별방", src: "zgFQ03jXaIo", duration: "3:37", trimStart: 2211, trimEnd: 2428 }
-        ]
-      },
-      {
-        id: "cover-loveattack-byeolbang",
-        type: "cover",
-        title: "[COVER] Love Attack - 원곡: RESCENE, 별이 부르는 방에 (별방)",
-        cover: "https://img.youtube.com/vi/zgFQ03jXaIo/hqdefault.jpg",
-        tracks: [
-          { name: "Love Attack - 별이 부르는 방에 별방", src: "zgFQ03jXaIo", duration: "2:48", trimStart: 2497, trimEnd: 2665 }
-        ]
-      },
-      {
-        id: "cover-dejavu-byeolbang",
-        type: "cover",
-        title: "[COVER] Deja Vu - 원곡: RESCENE, 별이 부르는 방에 (별방)",
-        cover: "https://img.youtube.com/vi/fCTkmJ_rWLo/hqdefault.jpg",
-        tracks: [
-          { name: "Deja Vu - 별이 부르는 방에 별방", src: "fCTkmJ_rWLo", duration: "3:04", trimStart: 0, trimEnd: 184 }
-        ]
-      },
-      {
-        id: "cover-runaway-acoustic-byeolbang",
-        type: "cover",
-        title: "[COVER] Runaway(Acoustic Ver) - 원곡: RESCENE, 별이 부르는 방에 (별방)",
-        cover: "https://img.youtube.com/vi/fCTkmJ_rWLo/hqdefault.jpg",
-        tracks: [
-          { name: "Runaway(Acoustic Ver) - 별이 부르는 방에 별방", src: "fCTkmJ_rWLo", duration: "3:23", trimStart: 185, trimEnd: 388 }
-        ]
-      },
-      {
-        id: "cover-stillwithyou-minami",
-        type: "cover",
-        title: "[COVER] Still With You - 원곡: 정국",
-        cover: "https://img.youtube.com/vi/cGB-3ZQoUsA/hqdefault.jpg",
-        tracks: [
-          { name: "Still With You 미나미", src: "cGB-3ZQoUsA", duration: "2:03", trimStart: 27, trimEnd: 150 }
-        ]
-      },
-      {
-        id: "cover-janedoe-minami",
-        type: "cover",
-        title: "[COVER] JANE DOE - 원곡: 요네즈 켄시, 우타다 히카루",
-        cover: "https://img.youtube.com/vi/cGB-3ZQoUsA/hqdefault.jpg",
-        tracks: [
-          { name: "JANE DOE 미나미", src: "cGB-3ZQoUsA", duration: "1:44", trimStart: 219, trimEnd: 323 }
-        ]
-      },
-      {
-        id: "cover-square-minami",
-        type: "cover",
-        title: "[COVER] Square - 원곡: 백예린",
-        cover: "https://img.youtube.com/vi/cGB-3ZQoUsA/hqdefault.jpg",
-        tracks: [
-          { name: "Square 미나미", src: "cGB-3ZQoUsA", duration: "1:28", trimStart: 388, trimEnd: 476 }
-        ]
-      },
-      {
-        id: "cover-loveecho-minami",
-        type: "cover",
-        title: "[COVER] Love Echo - 원곡: RESCENE, 미나미",
-        cover: "https://img.youtube.com/vi/otmyfnOeolo/hqdefault.jpg",
-        tracks: [
-          { name: "Love Echo 미나미", src: "otmyfnOeolo", duration: "1:14", trimStart: 35, trimEnd: 109 }
-        ]
-      },
-      {
-        id: "cover-mvp-minami",
-        type: "cover",
-        title: "[COVER] MVP - 원곡: RESCENE, 미나미",
-        cover: "https://img.youtube.com/vi/otmyfnOeolo/hqdefault.jpg",
-        tracks: [
-          { name: "MVP 미나미", src: "otmyfnOeolo", duration: "1:14", trimStart: 110, trimEnd: 184 }
-        ]
-      },
-      {
-        id: "cover-bloom-minami",
-        type: "cover",
-        title: "[COVER] Bloom - 원곡: RESCENE, 미나미",
-        cover: "https://img.youtube.com/vi/otmyfnOeolo/hqdefault.jpg",
-        tracks: [
-          { name: "Bloom 미나미", src: "otmyfnOeolo", duration: "2:53", trimStart: 202, trimEnd: 375 }
-        ]
-      },
-      {
-        id: "cover-mamush-minami",
-        type: "cover",
-        title: "[COVER] Mamush - 원곡: RESCENE, 미나미, 갸루 라이브 메들리",
-        cover: "https://img.youtube.com/vi/FcMaC8akSU8/hqdefault.jpg",
-        tracks: [
-          { name: "Mamush 미나미 - 갸루 라이브 메들리", src: "FcMaC8akSU8", duration: "1:26", trimStart: 61, trimEnd: 147 }
-        ]
-      },
-      {
-        id: "cover-lukaluka-minami",
-        type: "cover",
-        title: "[COVER] 루카루카★나이트 피버 - 원곡: RESCENE, 미나미, 갸루 라이브 메들리",
-        cover: "https://img.youtube.com/vi/FcMaC8akSU8/hqdefault.jpg",
-        tracks: [
-          { name: "루카루카★나이트 피버 미나미 - 갸루 라이브 메들리", src: "FcMaC8akSU8", duration: "1:30", trimStart: 147, trimEnd: 237 }
-        ]
-      },
-      {
-        id: "cover-loveagain-minami",
-        type: "cover",
-        title: "[COVER] Love again - 원곡: RESCENE, 미나미, 갸루 라이브 메들리 · 불량연애 OST",
-        cover: "https://img.youtube.com/vi/FcMaC8akSU8/hqdefault.jpg",
-        tracks: [
-          { name: "Love again 미나미 - 갸루 라이브 메들리 · 불량연애 OST", src: "FcMaC8akSU8", duration: "1:08", trimStart: 241, trimEnd: 309 }
-        ]
-      },
-      {
-        id: "cover-cutiehoney-minami",
-        type: "cover",
-        title: "[COVER] Cutie honey - 원곡: RESCENE, 미나미, 갸루 라이브 메들리",
-        cover: "https://img.youtube.com/vi/FcMaC8akSU8/hqdefault.jpg",
-        tracks: [
-          { name: "Cutie honey 미나미 - 갸루 라이브 메들리", src: "FcMaC8akSU8", duration: "0:42", trimStart: 310, trimEnd: 352 }
-        ]
-      },
-      {
-        id: "cover-mister-minami",
-        type: "cover",
-        title: "[COVER] Mister - 원곡: 카라, 갸루 라이브 메들리",
-        cover: "https://img.youtube.com/vi/FcMaC8akSU8/hqdefault.jpg",
-        tracks: [
-          { name: "Mister 미나미 원곡:카라 - 갸루 라이브 메들리", src: "FcMaC8akSU8", duration: "1:15", trimStart: 388, trimEnd: 463 }
-        ]
-      },
-      {
-        id: "cover-loveattack-acoustic-monkey",
-        type: "cover",
-        title: "[COVER] LOVE ATTACK (Acoustic Ver.) - 원곡: RESCENE, 먼키의 발자국 Live",
-        cover: "https://img.youtube.com/vi/qr6_VLHZ7ik/hqdefault.jpg",
-        tracks: [
-          { name: "LOVE ATTACK (Acoustic Ver.) - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "2:45", trimStart: 0, trimEnd: 165.3 }
-        ]
-      },
-      {
-        id: "cover-pinball-monkey",
-        type: "cover",
-        title: "[COVER] Pinball - 원곡: RESCENE, 먼키의 발자국 Live",
-        cover: "https://img.youtube.com/vi/qr6_VLHZ7ik/hqdefault.jpg",
-        tracks: [
-          { name: "Pinball - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "1:06", trimStart: 165.3, trimEnd: 231 }
-        ]
-      },
-      {
-        id: "cover-glowup-monkey",
-        type: "cover",
-        title: "[COVER] Glow Up - 원곡: RESCENE, 먼키의 발자국 Live",
-        cover: "https://img.youtube.com/vi/qr6_VLHZ7ik/hqdefault.jpg",
-        tracks: [
-          { name: "Glow Up - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "0:54", trimStart: 231, trimEnd: 285 }
-        ]
-      },
-      {
-        id: "cover-dejavu-monkey",
-        type: "cover",
-        title: "[COVER] Deja Vu - 원곡: RESCENE, 먼키의 발자국 Live",
-        cover: "https://img.youtube.com/vi/qr6_VLHZ7ik/hqdefault.jpg",
-        tracks: [
-          { name: "Deja Vu - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "2:00", trimStart: 285, trimEnd: 405 }
-        ]
-      },
-      {
-        id: "cover-prettygirl-monkey",
-        type: "cover",
-        title: "[COVER] Pretty Girl - 원곡: RESCENE, 먼키의 발자국 Live",
-        cover: "https://img.youtube.com/vi/qr6_VLHZ7ik/hqdefault.jpg",
-        tracks: [
-          { name: "Pretty Girl - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "2:32", trimStart: 405, trimEnd: 557 }
-        ]
-      },
-      {
-        id: "cover-mandanga-monkey",
-        type: "cover",
-        title: "[COVER] 晩餐歌(만찬가) - 원곡: tuki., 먼키의 발자국 Live",
-        cover: "https://img.youtube.com/vi/qr6_VLHZ7ik/hqdefault.jpg",
-        tracks: [
-          { name: "晩餐歌(만찬가) 먼데이 키즈 X 미나미 원곡:tuki. - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "3:35", trimStart: 557, trimEnd: 772 }
-        ]
-      },
-      {
-        id: "cover-mvp2-monkey",
-        type: "cover",
-        title: "[COVER] MVP - 미나미, 먼키의 발자국 Live",
-        cover: "https://img.youtube.com/vi/qr6_VLHZ7ik/hqdefault.jpg",
-        tracks: [
-          { name: "MVP 미나미 - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "0:24", trimStart: 772, trimEnd: 796 }
-        ]
-      },
-      {
-        id: "cover-bloom-monkey",
-        type: "cover",
-        title: "[COVER] Bloom - 리브, 먼키의 발자국 Live",
-        cover: "https://img.youtube.com/vi/qr6_VLHZ7ik/hqdefault.jpg",
-        tracks: [
-          { name: "Bloom 리브 - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "0:20", trimStart: 796, trimEnd: 816 }
-        ]
-      },
-      {
-        id: "cover-newworld-monkey",
-        type: "cover",
-        title: "[COVER] New World - 제나, 먼키의 발자국 Live",
-        cover: "https://img.youtube.com/vi/qr6_VLHZ7ik/hqdefault.jpg",
-        tracks: [
-          { name: "New World 제나 - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "0:19", trimStart: 816, trimEnd: 835.2 }
-        ]
-      },
-      {
-        id: "cover-snowflower-monkey",
-        type: "cover",
-        title: "[COVER] 눈의 꽃(雪の華) - 원곡: 나카시마 미카, 먼키의 발자국 Live",
-        cover: "https://img.youtube.com/vi/qr6_VLHZ7ik/hqdefault.jpg",
-        tracks: [
-          { name: "눈의 꽃(雪の華) 미나미 원곡:나카시마 미카 - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "0:48", trimStart: 835.3, trimEnd: 883 }
-        ]
-      },
-      {
-        id: "cover-annyeong-monkey",
-        type: "cover",
-        title: "[COVER] 안녕 (Hello) - 원곡: 박혜경,조이, 먼키의 발자국 Live",
-        cover: "https://img.youtube.com/vi/qr6_VLHZ7ik/hqdefault.jpg",
-        tracks: [
-          { name: "안녕 (Hello) 리브 원곡:박혜경,조이 - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "0:29", trimStart: 883, trimEnd: 912 }
-        ]
-      },
-      {
-        id: "cover-bamidoenikka-monkey",
-        type: "cover",
-        title: "[COVER] 밤이 되니까 - 원곡: 펀치, 먼키의 발자국 Live",
-        cover: "https://img.youtube.com/vi/qr6_VLHZ7ik/hqdefault.jpg",
-        tracks: [
-          { name: "밤이 되니까 제나 원곡:펀치 - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "0:22", trimStart: 912, trimEnd: 934 }
-        ]
-      },
-      {
-        id: "cover-rollercoaster-monkey",
-        type: "cover",
-        title: "[COVER] Roller Coaster - 원곡: 청하, 먼키의 발자국 Live",
-        cover: "https://img.youtube.com/vi/qr6_VLHZ7ik/hqdefault.jpg",
-        tracks: [
-          { name: "Roller Coaster 미나미 원곡:청하 - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "0:31", trimStart: 934.2, trimEnd: 965 }
-        ]
-      },
-      {
-        id: "cover-haneularaeseo-monkey",
-        type: "cover",
-        title: "[COVER] 하늘 아래서 - 원곡: 여자친구, 먼키의 발자국 Live",
-        cover: "https://img.youtube.com/vi/qr6_VLHZ7ik/hqdefault.jpg",
-        tracks: [
-          { name: "하늘 아래서 리브 원곡:여자친구 - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "0:18", trimStart: 965, trimEnd: 983 }
-        ]
-      },
-      {
-        id: "cover-hopenot-monkey",
-        type: "cover",
-        title: "[COVER] 아니길 (Hope Not) - 원곡: BLACKPINK, 먼키의 발자국 Live",
-        cover: "https://img.youtube.com/vi/qr6_VLHZ7ik/hqdefault.jpg",
-        tracks: [
-          { name: "아니길 (Hope Not) 제나 원곡:BLACKPINK - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "0:34", trimStart: 983.3, trimEnd: 1017 }
-        ]
-      },
-      {
-        id: "cover-attention-monkey",
-        type: "cover",
-        title: "[COVER] Attention - 원곡: Charlie Puth(찰리 푸스), 먼키의 발자국 Live",
-        cover: "https://img.youtube.com/vi/qr6_VLHZ7ik/hqdefault.jpg",
-        tracks: [
-          { name: "Attention 미나미 원곡:Charlie Puth(찰리 푸스) - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "0:40", trimStart: 1017, trimEnd: 1057 }
-        ]
-      },
-      {
-        id: "cover-nalwihanibyeol-monkey",
-        type: "cover",
-        title: "[COVER] 날 위한 이별 - 원곡: 김혜림,디아, 먼키의 발자국 Live",
-        cover: "https://img.youtube.com/vi/qr6_VLHZ7ik/hqdefault.jpg",
-        tracks: [
-          { name: "날 위한 이별 리브 원곡:김혜림,디아 - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "0:35", trimStart: 1057, trimEnd: 1092 }
-        ]
-      },
-      {
-        id: "cover-bomnaeum-monkey",
-        type: "cover",
-        title: "[COVER] 봄 내음보다 너를 - 원곡: 김나영, 먼키의 발자국 Live",
-        cover: "https://img.youtube.com/vi/qr6_VLHZ7ik/hqdefault.jpg",
-        tracks: [
-          { name: "봄 내음보다 너를 원곡:김나영 - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "0:33", trimStart: 1092, trimEnd: 1125.2 }
-        ]
-      },
-      {
-        id: "cover-yeongwonhansarang-monkey",
-        type: "cover",
-        title: "[COVER] 영원한 사랑 - 원곡: 핑클(Fin.K.L), 먼키의 발자국 Live",
-        cover: "https://img.youtube.com/vi/qr6_VLHZ7ik/hqdefault.jpg",
-        tracks: [
-          { name: "영원한 사랑 리브 원곡:핑클(Fin.K.L) - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "0:31", trimStart: 1126, trimEnd: 1157.2 }
-        ]
-      },
-      {
-        id: "cover-whenimwasyourman-monkey",
-        type: "cover",
-        title: "[COVER] When I Was Your Man - 원곡: Bruno Mars(브루노 마스), 먼키의 발자국 Live",
-        cover: "https://img.youtube.com/vi/qr6_VLHZ7ik/hqdefault.jpg",
-        tracks: [
-          { name: "When I Was Your Man 미나미 원곡:Bruno Mars(브루노 마스) - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "0:27", trimStart: 1157.25, trimEnd: 1184 }
-        ]
-      },
-      {
-        id: "cover-hello2-monkey",
-        type: "cover",
-        title: "[COVER] Hello - 원곡: 허각, 먼키의 발자국 Live",
-        cover: "https://img.youtube.com/vi/qr6_VLHZ7ik/hqdefault.jpg",
-        tracks: [
-          { name: "Hello 리브 원곡:허각 - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "0:33", trimStart: 1184, trimEnd: 1217 }
-        ]
-      },
-      {
-        id: "cover-jeobyeol-monkey",
-        type: "cover",
-        title: "[COVER] 저 별 - 원곡: dori(도리), 먼키의 발자국 Live",
-        cover: "https://img.youtube.com/vi/qr6_VLHZ7ik/hqdefault.jpg",
-        tracks: [
-          { name: "저 별 제나 원곡:dori(도리) - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "0:34", trimStart: 1217, trimEnd: 1251 }
-        ]
-      },
-      {
-        id: "cover-unmyeong-monkey",
-        type: "cover",
-        title: "[COVER] 운명 - 원곡: 먼데이키즈 with 이이경, 먼키의 발자국 Live",
-        cover: "https://img.youtube.com/vi/qr6_VLHZ7ik/hqdefault.jpg",
-        tracks: [
-          { name: "운명 리브 X 미나미 원곡:먼데이키즈 with 이이경 - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "0:53", trimStart: 1251, trimEnd: 1304 }
-        ]
-      },
-      {
-        id: "cover-manyakae-monkey",
-        type: "cover",
-        title: "[COVER] 만약에 - 원곡: 태연, 먼키의 발자국 Live",
-        cover: "https://img.youtube.com/vi/qr6_VLHZ7ik/hqdefault.jpg",
-        tracks: [
-          { name: "만약에 제나 원곡:태연 - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "0:00", trimStart: 1304.4 }
+          { name: "Underneath the Tree Special Live RESCENE", src: "Ocby704Ou-E", duration: "0:00" }
         ]
       }
     ];
 
-    const albums = [...rawAlbums].sort((a, b) => a.title.localeCompare(b.title));
+    // 커버곡(cover)은 유튜브 업로드 날짜가 최신인 순서(작성해 둔 rawAlbums 배열
+    // 순서 자체가 그 순서)를 그대로 유지하고, 그 외 앨범들은 기존처럼 제목
+    // 가나다순으로 정렬한다.
+    const rawAlbumOrderIndex = new Map(rawAlbums.map((a, i) => [a, i]));
+    const albums = [...rawAlbums].sort((a, b) => {
+      if (a.type === 'cover' && b.type === 'cover') {
+        return rawAlbumOrderIndex.get(a) - rawAlbumOrderIndex.get(b);
+      }
+      return a.title.localeCompare(b.title);
+    });
     const INITIAL_IMAGE = "리센느1.webp";
 
     const BACKGROUND_FOLDER = "background";
@@ -5517,7 +5169,8 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
     // 영문으로만 표기된 "MINAMI" 트랙/앨범이 검색되도록 한다.
     const SEARCH_ALIASES = [
       ['미나미', 'minami'],
-      ['luka luka night fever', '루카루카★나이트 피버']
+      ['luka luka night fever', '루카루카★나이트 피버'],
+      ['오버도스', 'overdose'], ['오버도즈', 'overdose']
     ];
     // 영어 트랙 제목을 한글 발음으로 검색해도 찾을 수 있도록 하는 단어 단위
     // 별칭 테이블. [한글 발음, 영어 단어(붙여쓰기)] 쌍으로 등록해두면,
@@ -5532,7 +5185,7 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
       ['데자뷰', 'dejavu'], ['데자부', 'dejavu'],
       ['글로우업', 'glowup'], ['글로우', 'glow'], ['업', 'up'],
       ['핀볼', 'pinball'], ['런어웨이', 'runaway'],
-      ['스턱', 'stuck'], ['위드', 'with'], ['유', 'you'],
+      ['스턱', 'stuck'], ['위드', 'with'], ['윗', 'with'], ['유', 'you'], ['유', 'u'],
       ['어텐션', 'attention'], ['헬로', 'hello'],
       ['롤러코스터', 'rollercoaster'], ['롤러', 'roller'], ['코스터', 'coaster'],
       ['뉴월드', 'newworld'], ['월드', 'world'], ['뉴', 'new'],
@@ -5625,6 +5278,13 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
       const normalizedChain = chain.replace(/\s*,\s*/g, ', ').replace(/\s*X\s*/g, ' X ');
       return `${title} · ${normalizedChain}${rest}`;
     }
+    // ko -> [en, en, ...] 형태로 묶어서, 같은 한글 발음에 여러 영어 표기가
+    // 대응될 수 있게 한다(예: "유"는 "you"도 되고 "U"도 된다).
+    const EN_KO_WORD_MAP = {};
+    for (const [ko, en] of EN_KO_WORD_PAIRS) {
+      if (!EN_KO_WORD_MAP[ko]) EN_KO_WORD_MAP[ko] = [];
+      if (!EN_KO_WORD_MAP[ko].includes(en)) EN_KO_WORD_MAP[ko].push(en);
+    }
     function trackMatchesSearch(item, query) {
       if (!query) return true;
       const name = (item.track.name || '').toLowerCase();
@@ -5634,10 +5294,34 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
         if (query.includes(alias) && (name.includes(target) || album.includes(target))) return true;
         if (query.includes(target) && (name.includes(alias) || album.includes(alias))) return true;
       }
-      // 영어 단어 <-> 한글 발음 매칭 (공백 무시)
       const queryNorm = normSearch(query);
       const nameNorm = normSearch(name);
       const albumNorm = normSearch(album);
+
+      // 공백으로 구분된 단어가 2개 이상인 검색어("스틸 위드 유" 등)는 각
+      // 단어를 독립적으로(OR) 매칭하면 "위드"나 "유" 한 단어만으로 관계
+      // 없는 다른 곡까지 걸려버린다. 이런 경우 각 단어를 순서대로 번역해
+      // 이어붙인 "구문 전체"가 실제로 곡/앨범명에 포함될 때만 매칭되도록
+      // 한다(단어 하나만 맞아도 통과되는 일이 없게 AND 조건으로 검사).
+      const rawTokens = query.split(/\s+/).filter(Boolean);
+      if (rawTokens.length > 1) {
+        let combos = [''];
+        for (const token of rawTokens) {
+          const options = EN_KO_WORD_MAP[token] || [normSearch(token)];
+          const next = [];
+          for (const c of combos) {
+            for (const o of options) {
+              next.push(c + o);
+            }
+          }
+          combos = next.length ? next : combos;
+          if (combos.length > 64) combos = combos.slice(0, 64);
+        }
+        return combos.some(phrase => phrase && (nameNorm.includes(phrase) || albumNorm.includes(phrase)));
+      }
+
+      // 단어가 하나뿐인 검색어는 기존처럼 한글 발음 <-> 영어 단어 매칭을
+      // 느슨하게(부분 일치) 허용한다.
       for (const [ko, en] of EN_KO_WORD_PAIRS) {
         // 한글 발음의 일부만 입력해도(예: "러브어택"의 "러" 한 글자만) 매칭되도록
         // 쿼리가 발음 별칭에 포함되는 경우도 함께 확인한다.
