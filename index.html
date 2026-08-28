@@ -4724,7 +4724,7 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
         title: "[COVER] 너에게 닿기를 - 원곡: 10cm",
         cover: "https://img.youtube.com/vi/Wu9cKzV0ERQ/hqdefault.jpg",
         tracks: [
-          { name: "너에게 닿기를 리센느", src: "Wu9cKzV0ERQ", duration: "2:34", trimStart: 643, trimEnd: 797 }
+          { name: "너에게 닿기를", src: "Wu9cKzV0ERQ", duration: "2:34", trimStart: 643, trimEnd: 797 }
         ]
       },
       {
@@ -5564,7 +5564,9 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
       ['헬로우xo', 'helloxo'], ['헬로우엑스오', 'helloxo'],
       ['비지보이', 'busyboy'], ['비지', 'busy'], ['보이', 'boy'],
       ['러너웨이', 'runaway'],
-      ['갈란티스리믹스', 'galantisremix'], ['갈란티스', 'galantis'], ['리믹스', 'remix']
+      ['갈란티스리믹스', 'galantisremix'], ['갈란티스', 'galantis'], ['리믹스', 'remix'],
+      ['밤비', 'bambi'],
+      ['어쿠스틱라이브믹스', 'acousticlivemix'], ['어쿠스틱', 'acoustic'], ['라이브', 'live'], ['믹스', 'mix']
     ];
     function normSearch(str) {
       return (str || '').toLowerCase().replace(/\s+/g, '');
@@ -5579,27 +5581,49 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
       if (!album) return '';
       if (album.type === 'cover' || album.type === 'featuring') {
         const m = album.title.match(/원곡\s*:\s*([^,]+)/);
-        if (m) return `원곡: ${m[1].trim()}`;
-        // 원곡 표기가 없으면 "[COVER] " 접두사만 제거하고 그대로 보여준다.
-        return album.title.replace(/^\[[^\]]+\]\s*/, '');
+        if (m) {
+          const artist = m[1].trim();
+          // 원곡이 RESCENE(리센느) 자작곡인 경우 "원곡: RESCENE" 표시는 불필요하므로 생략한다.
+          if (/^(RESCENE|리센느)$/i.test(artist)) return '';
+          return `원곡: ${artist}`;
+        }
+        // 원곡 표기가 없으면 RESCENE 자작곡이라는 뜻이므로(트랙 이름에 이미
+        // 멤버 정보가 표시되므로) 별도 부제를 붙이지 않는다.
+        return '';
       }
       return album.title;
     }
+    // 트랙 이름 안에 이미 "원곡:" 이나 "- 프로그램명" 같은 부가 설명이 포함돼 있는지 확인한다.
+    // 이런 경우 앨범 제목에서 뽑아낸 부제(getAlbumSuffixForDisplay)를 또 붙이면
+    // "... 원곡:김혜림,디아 - 먼키의 발자국 Live - 원곡: 김혜림" 처럼 중복 표시가 된다.
+    function trackNameHasEmbeddedContext(name) {
+      if (!name) return false;
+      return /원곡\s*:/.test(name) || / - /.test(name);
+    }
+    const KNOWN_MEMBER_NAMES = ['리브', '미나미', '제나', '원이', '규빈', '메이'];
+    const MEMBER_TOKEN_RE = '(?:' + KNOWN_MEMBER_NAMES.join('|') + ')';
+    // 곡 제목 안에서 (가장 왼쪽에 등장하는) 멤버 이름 연속 구간을 찾는다.
+    // 문자열 끝에 있든("꽃길 규빈 X 미나미"), 뒤에 "원곡:...", "- 프로그램명" 같은
+    // 꼬리표가 더 붙어있든("MVP 미나미 - 먼키의 발자국 Live") 상관없이 잡아낸다.
+    const MEMBER_CHAIN_RE = new RegExp(
+      '(^|\\s)(' + MEMBER_TOKEN_RE + '(?:\\s*[,X]\\s*' + MEMBER_TOKEN_RE + ')*)(?=\\s|$)'
+    );
     // 곡 제목 뒤에 붙어있는 멤버 이름을 " · " 로 시각적으로 분리해서
     // 보여준다. 예: "그런 일은 리브,미나미,제나" -> "그런 일은 · 리브, 미나미, 제나"
-    // 알려진 멤버 이름 조합으로 끝나는 경우에만 분리하고, 그 외(콜라보
-    // 게스트 등 알 수 없는 이름이 섞인 경우)는 원래 이름을 그대로 둔다.
-    const KNOWN_MEMBER_NAMES = ['리브', '미나미', '제나', '원이', '규빈'];
-    const MEMBER_SUFFIX_RE = new RegExp(
-      '^(.*\\S)\\s+((?:(?:' + KNOWN_MEMBER_NAMES.join('|') + ')\\s*(?:[,X]\\s*)?)+)$'
-    );
+    // 멤버 이름이 등장하는 가장 앞쪽 위치를 찾아 그 앞에 "·"를 삽입하고,
+    // 멤버 이름 뒤에 다른 문구(원곡 표기, 프로그램명 등)가 더 있어도 그대로 유지한다.
     function formatTrackNameForDisplay(name) {
       if (!name) return name;
-      const m = name.match(MEMBER_SUFFIX_RE);
+      if (name.includes(' · ')) return name; // 이미 정리된 이름이면 그대로 둔다.
+      const m = name.match(MEMBER_CHAIN_RE);
       if (!m) return name;
-      const title = m[1].trim();
-      const members = m[2].trim().replace(/\s*,\s*/g, ', ').replace(/\s*X\s*/g, ' X ').replace(/,\s*$/, '');
-      return `${title} · ${members}`;
+      const chainStart = m.index + m[1].length;
+      const title = name.slice(0, chainStart).trim();
+      if (!title) return name; // 멤버 이름이 맨 앞에 있으면(앞에 곡 제목이 없으면) 그대로 둔다.
+      const chain = m[2];
+      const rest = name.slice(chainStart + chain.length);
+      const normalizedChain = chain.replace(/\s*,\s*/g, ', ').replace(/\s*X\s*/g, ' X ');
+      return `${title} · ${normalizedChain}${rest}`;
     }
     function trackMatchesSearch(item, query) {
       if (!query) return true;
@@ -5615,7 +5639,9 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
       const nameNorm = normSearch(name);
       const albumNorm = normSearch(album);
       for (const [ko, en] of EN_KO_WORD_PAIRS) {
-        if (queryNorm.includes(ko) && (nameNorm.includes(en) || albumNorm.includes(en))) return true;
+        // 한글 발음의 일부만 입력해도(예: "러브어택"의 "러" 한 글자만) 매칭되도록
+        // 쿼리가 발음 별칭에 포함되는 경우도 함께 확인한다.
+        if ((queryNorm.includes(ko) || (queryNorm && ko.includes(queryNorm))) && (nameNorm.includes(en) || albumNorm.includes(en))) return true;
       }
       return false;
     }
@@ -9770,7 +9796,12 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
       titleSpan.appendChild(document.createTextNode(
         selectedAlbum
           ? `${idx + 1}. ${formatTrackNameForDisplay(item.track.name)}`
-          : `${idx + 1}. ${formatTrackNameForDisplay(item.track.name)} - ${getAlbumSuffixForDisplay(item.album)}`
+          : (() => {
+              const formattedName = formatTrackNameForDisplay(item.track.name);
+              if (trackNameHasEmbeddedContext(item.track.name)) return `${idx + 1}. ${formattedName}`;
+              const suffix = getAlbumSuffixForDisplay(item.album);
+              return suffix ? `${idx + 1}. ${formattedName} - ${suffix}` : `${idx + 1}. ${formattedName}`;
+            })()
       ));
 
       marqueeTrack.appendChild(titleSpan);
