@@ -4081,7 +4081,13 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
           if (this._player && this._player.getCurrentTime) {
             // 지정된 트림 종료 지점을 지나면 실제 영상이 아직 남아 있어도
             // 곡이 끝난 것처럼 처리한다(다음 곡으로 자동 전환 포함).
-            if (this._trimEnd != null && this._player.getCurrentTime() >= this._trimEnd) {
+            // (버그 수정) 유튜브 iframe API의 getCurrentTime()은 값이 매끄럽게
+            // 갱신되지 않고 가끔 최대 1초 가까이 튀거나 늦게 반영될 때가 있다.
+            // 그래서 트림된 커버곡들이 실제로는 끝까지 다 재생되지 않고
+            // 의도한 길이보다 약 1초 일찍 멈춰버리는 문제가 있었다. 트림
+            // 종료 지점에 약간의 여유(0.4초)를 더 줘서, 지정한 구간이 항상
+            // 끝까지 재생되도록 한다.
+            if (this._trimEnd != null && this._player.getCurrentTime() >= this._trimEnd + 0.4) {
               this._paused = true;
               this._stopPolling();
               if (this._player.pauseVideo) this._player.pauseVideo();
@@ -5330,7 +5336,18 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
       if (!query) return true;
       const name = (item.track.name || '').toLowerCase();
       const album = stripAlbumTagsForSearch((item.album.title || '').toLowerCase());
-      if (name.includes(query) || album.includes(query)) return true;
+      // (버그 수정) "런"처럼 검색어가 한 글자뿐일 때 단순 includes()로 비교하면
+      // "그런 일은"처럼 그 글자가 우연히 다른 단어 중간에 들어있는 곡까지
+      // 전부 걸려버렸다("런" 검색 → Runaway뿐 아니라 관련 없는 "그런 일은"도
+      // 뜨는 문제). 한 글자짜리 검색어는 단어 시작 위치(맨 앞 또는 공백 뒤)에
+      // 올 때만 매칭되도록 해서 이런 오탐을 막는다. 두 글자 이상은 기존처럼
+      // 문자열 어디에 있든 매칭(부분 검색)을 그대로 허용한다.
+      if (query.length === 1) {
+        const wordStartRe = new RegExp('(^|\\s)' + query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+        if (wordStartRe.test(name) || wordStartRe.test(album)) return true;
+      } else if (name.includes(query) || album.includes(query)) {
+        return true;
+      }
       for (const [alias, target] of SEARCH_ALIASES) {
         // 별칭 전체를 다 입력했을 때뿐 아니라, 별칭의 앞부분만 입력했을 때도
         // (예: "오버도즈"를 다 치지 않고 "오버"만 쳐도) 매칭되도록 부분 일치도 허용한다.
@@ -9846,7 +9863,8 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
       'op05giODUE0': { videoId: '7DZlkZ4bMpU', start: 31, label: '🎉 응원법' },     // Runaway
       'v6R4vvOkNH4': { videoId: 's1S-lnU-yMI', start: 23, label: '🎉 응원법' },     // UhUh
       'QC641OJe_Aw': { videoId: 'QCA8quPZHPc', start: 0, label: '🎉 응원법' },      // YoYo
-      '_tADnkWlvnA': { videoId: 'QCA8quPZHPc', start: 0, label: '🎉 응원법' }       // YoYo (Re;Scene)
+      '_tADnkWlvnA': { videoId: 'QCA8quPZHPc', start: 0, label: '🎉 응원법' },       // YoYo (Re;Scene)
+      'Pmux2kYUsjk': { videoId: 'Pmux2kYUsjk', start: 0, end: null, label: '▶ 영상보기' } // Love Attack (KCON Ver.)
     };
 
     // 커버곡/피처링곡(COVER, 피처링 카테고리) 앨범들은 트랙 자체가 이미 유튜브
