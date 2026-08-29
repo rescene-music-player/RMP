@@ -656,6 +656,12 @@
       border-bottom: 1px solid rgba(255,255,255,0.12);
       color: #fff;
       flex-shrink: 0;
+      cursor: move;
+      user-select: none;
+    }
+    .mv-modal-wrap.mv-manual-box {
+      max-width: none;
+      max-height: none;
     }
     .mv-modal-title { font-size: 15px; font-weight: 700; }
 
@@ -695,20 +701,6 @@
       height: 100%;
       border: none;
     }
-    .mv-player-back-btn {
-      position: absolute;
-      top: 8px;
-      left: 8px;
-      z-index: 2;
-      background: rgba(12,10,22,0.75);
-      border: 1px solid rgba(255,255,255,0.3);
-      color: #fff;
-      border-radius: 8px;
-      padding: 6px 10px;
-      font-size: 12px;
-      cursor: pointer;
-    }
-
     .mv-list {
       overflow-y: auto;
       flex: 1;
@@ -2669,7 +2661,10 @@
       white-space: nowrap;
     }
 
-    .playlist-item-container.overflowing .playlist-marquee-track {
+    /* (변경) 재생목록/트랙리스트의 곡 제목은 항상 흐르지 않고, 마우스를
+       올린(hover) 항목만 흐르게 한다. */
+    .track-item:hover .playlist-item-container.overflowing .playlist-marquee-track,
+    #current-playlist li:hover .playlist-item-container.overflowing .playlist-marquee-track {
       animation: smooth-marquee-playlist linear infinite alternate;
       animation-duration: var(--marquee-duration, 2s);
     }
@@ -3812,10 +3807,12 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
           <button id="mv-modal-close-btn" class="mv-modal-close-btn" title="닫기">✕</button>
         </div>
       </div>
-      <div id="mv-player-area" class="mv-player-area">
-        <button id="mv-player-back-btn" class="mv-player-back-btn">‹ 목록으로</button>
-      </div>
+      <div id="mv-player-area" class="mv-player-area"></div>
       <div id="mv-list" class="mv-list"></div>
+      <div class="charmander-resize-handle tl" data-corner="tl" title="드래그해서 크기 조절"></div>
+      <div class="charmander-resize-handle tr" data-corner="tr" title="드래그해서 크기 조절"></div>
+      <div class="charmander-resize-handle bl" data-corner="bl" title="드래그해서 크기 조절"></div>
+      <div class="charmander-resize-handle br" data-corner="br" title="드래그해서 크기 조절"></div>
     </div>
   </div>
   <script>
@@ -3843,7 +3840,6 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
       var closeBtn = document.getElementById('mv-modal-close-btn');
       var listEl = document.getElementById('mv-list');
       var playerArea = document.getElementById('mv-player-area');
-      var backBtn = document.getElementById('mv-player-back-btn');
       var sortDateBtn = document.getElementById('mv-sort-date-btn');
       var sortViewsBtn = document.getElementById('mv-sort-views-btn');
 
@@ -3953,7 +3949,6 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
       modalBg.addEventListener('click', function(e) {
         if (e.target === modalBg) { modalBg.classList.remove('show'); stopMv(); }
       });
-      backBtn.addEventListener('click', stopMv);
 
       // 같은 버튼을 다시 누르면 방향(오름/내림차순)이 토글되고,
       // 다른 정렬 기준 버튼을 누르면 그 기준으로 전환된다(방향은 유지).
@@ -3976,6 +3971,122 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
         renderList();
       });
       updateSortBtnLabels();
+
+      // ---- 뮤비 모달: 뮤직플레이어의 영상보기 창처럼 자유롭게 이동/크기 조절 ----
+      // 헤더(mv-modal-head)를 잡고 끌면 어디로든 옮길 수 있고, 네 모서리를
+      // 잡고 끌면 크기도 조절할 수 있다. 처음엔 화면 중앙에 떠 있다가,
+      // 실제로 옮기거나 크기를 조절하는 순간에만 position:fixed로 전환해서
+      // 그 뒤로는 자유 위치/크기를 유지한다(모달을 닫았다 다시 열어도 유지됨).
+      (function setupMvModalFree() {
+        var wrap = modalBg.querySelector('.mv-modal-wrap');
+        var head = modalBg.querySelector('.mv-modal-head');
+        if (!wrap || !head) return;
+
+        var MIN_W = 320, MIN_H = 260;
+
+        function ensureManual() {
+          if (wrap.dataset.mvManual === '1') return;
+          var r = wrap.getBoundingClientRect();
+          wrap.style.position = 'fixed';
+          wrap.style.left = r.left + 'px';
+          wrap.style.top = r.top + 'px';
+          wrap.style.width = r.width + 'px';
+          wrap.style.height = r.height + 'px';
+          wrap.style.margin = '0';
+          wrap.classList.add('mv-manual-box');
+          wrap.dataset.mvManual = '1';
+        }
+
+        function clientXY(e) {
+          var t = e.touches && e.touches[0];
+          return { x: t ? t.clientX : e.clientX, y: t ? t.clientY : e.clientY };
+        }
+
+        // ---- 이동(드래그) ----
+        var dragging = false, dStartX = 0, dStartY = 0, dStartLeft = 0, dStartTop = 0;
+
+        function onDragStart(e) {
+          if (e.target.closest('button')) return;
+          ensureManual();
+          dragging = true;
+          var p = clientXY(e);
+          dStartX = p.x; dStartY = p.y;
+          var r = wrap.getBoundingClientRect();
+          dStartLeft = r.left; dStartTop = r.top;
+          e.preventDefault();
+        }
+        function onDragMove(e) {
+          if (!dragging) return;
+          var p = clientXY(e);
+          var nl = dStartLeft + (p.x - dStartX);
+          var nt = dStartTop + (p.y - dStartY);
+          nl = Math.max(0, Math.min(window.innerWidth - wrap.offsetWidth, nl));
+          nt = Math.max(0, Math.min(window.innerHeight - wrap.offsetHeight, nt));
+          wrap.style.left = nl + 'px';
+          wrap.style.top = nt + 'px';
+          if (e.cancelable) e.preventDefault();
+        }
+        function onDragEnd() { dragging = false; }
+
+        head.addEventListener('mousedown', onDragStart);
+        head.addEventListener('touchstart', onDragStart, { passive: false });
+        document.addEventListener('mousemove', onDragMove);
+        document.addEventListener('touchmove', onDragMove, { passive: false });
+        document.addEventListener('mouseup', onDragEnd);
+        document.addEventListener('touchend', onDragEnd);
+
+        // ---- 크기 조절(네 모서리) ----
+        // 왼쪽 모서리(tl/bl)를 잡고 끌 때는 오른쪽이 아니라 실제로 잡은
+        // 방향(왼쪽/위)으로 늘어나도록, 늘어난 만큼 left/top도 같이
+        // 보정해서 반대쪽 모서리가 그 자리에 고정되게 한다.
+        var resizing = false, corner = 'br';
+        var rStartX = 0, rStartY = 0, rStartW = 0, rStartH = 0, rStartLeft = 0, rStartTop = 0;
+
+        function onResizeDown(e) {
+          ensureManual();
+          resizing = true;
+          corner = e.currentTarget.dataset.corner || 'br';
+          var p = clientXY(e);
+          rStartX = p.x; rStartY = p.y;
+          var r = wrap.getBoundingClientRect();
+          rStartW = r.width; rStartH = r.height;
+          rStartLeft = r.left; rStartTop = r.top;
+          e.preventDefault();
+          e.stopPropagation();
+        }
+        function onResizeMove(e) {
+          if (!resizing) return;
+          var p = clientXY(e);
+          var dx = p.x - rStartX;
+          var dy = p.y - rStartY;
+          var isLeft = (corner === 'tl' || corner === 'bl');
+          var isTop = (corner === 'tl' || corner === 'tr');
+
+          var newW = rStartW + (isLeft ? -dx : dx);
+          var newH = rStartH + (isTop ? -dy : dy);
+          newW = Math.max(MIN_W, Math.min(window.innerWidth, newW));
+          newH = Math.max(MIN_H, Math.min(window.innerHeight, newH));
+
+          var growW = newW - rStartW;
+          var growH = newH - rStartH;
+
+          wrap.style.width = newW + 'px';
+          wrap.style.height = newH + 'px';
+          if (isLeft) wrap.style.left = (rStartLeft - growW) + 'px';
+          if (isTop) wrap.style.top = (rStartTop - growH) + 'px';
+          if (e.cancelable) e.preventDefault();
+        }
+        function onResizeUp() { resizing = false; }
+
+        wrap.querySelectorAll('.charmander-resize-handle').forEach(function (h) {
+          h.addEventListener('mousedown', onResizeDown);
+          h.addEventListener('touchstart', onResizeDown, { passive: false });
+        });
+        document.addEventListener('mousemove', onResizeMove);
+        document.addEventListener('touchmove', onResizeMove, { passive: false });
+        document.addEventListener('mouseup', onResizeUp);
+        document.addEventListener('touchend', onResizeUp);
+      })();
     });
   </script>
 
@@ -9449,6 +9560,7 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
       let corner = 'br';
       let startX = 0;
       let startWidth = 0;
+      let startLeft = 0;
 
       function onMove(e) {
         if (!resizing || !box) return;
@@ -9456,12 +9568,24 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
         const delta = clientX - startX;
         // 왼쪽 모서리(tl/bl)를 끌 때는 마우스가 왼쪽으로 갈수록 커져야 하므로
         // 부호를 뒤집는다. 오른쪽 모서리(tr/br)는 마우스가 오른쪽으로 갈수록 커진다.
-        const sign = (corner === 'tl' || corner === 'bl') ? -1 : 1;
+        const isLeftCorner = (corner === 'tl' || corner === 'bl');
+        const sign = isLeftCorner ? -1 : 1;
         let newWidth = startWidth + delta * sign;
         const maxW = (box.id === 'panel-cheer') ? CHEER_MAX_WIDTH : MAX_WIDTH;
         newWidth = Math.max(MIN_WIDTH, Math.min(maxW, newWidth));
         box.style.width = `${newWidth}px`;
         box.style.maxWidth = 'none';
+
+        // (버그 수정) 왼쪽 모서리(tl/bl)를 잡고 늘리면 반대쪽인 오른쪽이
+        // 늘어나 보이는 문제가 있었다. 너비만 바꾸면 박스의 왼쪽 모서리는
+        // 그대로 고정된 채로 오른쪽으로만 커지기 때문이다. 왼쪽 모서리를
+        // 잡은 경우에는, 늘어난 만큼(growAmount) 박스를 왼쪽으로도 같이
+        // 옮겨서(left 보정) 실제로 잡은 방향(왼쪽)으로 커지고 반대쪽
+        // (오른쪽) 모서리는 원래 자리에 그대로 고정되게 한다.
+        if (isLeftCorner) {
+          const growAmount = newWidth - startWidth;
+          box.style.left = `${startLeft - growAmount}px`;
+        }
 
         // (버그 수정) 예전에는 여기서 패딩/헤더바 높이를 26px/18px로 어림잡아
         // box.style.height를 직접 계산해 넣었는데, 실제 렌더된 헤더 바 높이와
@@ -9503,6 +9627,11 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
         box.classList.add('resizing');
         startX = e.touches ? e.touches[0].clientX : e.clientX;
         startWidth = box.getBoundingClientRect().width;
+        // 왼쪽 모서리를 끌 때 보정에 쓸 기준 left 값. 아직 드래그로 옮기지
+        // 않아 fixed로 전환되기 전(position: relative)이면 left가 지정돼
+        // 있지 않을 수 있으므로(computed 값이 'auto'), 그 경우는 0으로 본다.
+        const computedLeft = parseFloat(getComputedStyle(box).left);
+        startLeft = isFinite(computedLeft) ? computedLeft : 0;
         document.addEventListener('mousemove', onMove);
         document.addEventListener('mouseup', onUp);
         document.addEventListener('touchmove', onMove, { passive: false });
@@ -9531,7 +9660,7 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
       // 실제 트랙 항목과 높이가 달라서 측정 대상에 포함되면 박스가 커지거나
       // 작아지는 문제가 생긴다. 실제 트랙 항목(.track-item)만 측정한다.
       const items = box.querySelectorAll('.track-item');
-      const rowsToShow = 3;
+      const rowsToShow = 7;
 
       if (items.length === 0) {
         // 플레이스홀더만 있을 때는 이전에 측정해둔 정상 항목 크기
