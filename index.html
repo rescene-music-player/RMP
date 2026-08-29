@@ -261,7 +261,7 @@
     .captured-list-panel {
       position: fixed;
       left: 68px;
-      bottom: 68px;
+      bottom: 122px;
       z-index: 9998;
       background: rgba(18, 22, 28, 0.85);
       border: 1px solid rgba(255, 255, 255, 0.25);
@@ -583,10 +583,18 @@
       display: none;
     }
 
-    /* 라이트/다크 모드 버튼 오른쪽에 위치하는 뮤비 보기 버튼 (데스크탑: 테마 버튼 옆에 고정) */
+    /* 라이트/다크 모드 버튼 오른쪽에 위치하는 뮤비 보기 버튼 (아이콘 + 텍스트, 데스크탑: 테마 버튼 옆에 고정) */
     .mv-view-btn {
+      position: fixed;
       left: 89px;
-      font-size: 17px;
+      width: auto;
+      height: 44px;
+      padding: 0 14px;
+      border-radius: 22px;
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+      gap: 5px;
     }
 
     /* ----------------------------------
@@ -643,6 +651,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      flex-wrap: wrap;
       gap: 10px;
       padding: 14px 16px;
       border-bottom: 1px solid rgba(255,255,255,0.12);
@@ -651,7 +660,7 @@
     }
     .mv-modal-title { font-size: 15px; font-weight: 700; }
 
-    .mv-sort-row { display: flex; gap: 6px; }
+    .mv-sort-row { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
     .mv-sort-btn {
       background: rgba(255,255,255,0.08);
       border: 1px solid rgba(255,255,255,0.25);
@@ -667,6 +676,7 @@
       border-color: #FC6FCF;
       color: #fff;
     }
+    .mv-sort-arrow { font-size: 10px; margin-left: 2px; }
 
     .mv-player-area {
       position: relative;
@@ -3140,6 +3150,14 @@
         margin-bottom: 0;
       }
 
+      /* 뮤비 버튼은 모바일에서도 아이콘+텍스트를 위해 폭을 자동으로 유지 */
+      .mv-view-btn {
+        width: auto;
+        height: 40px;
+        padding: 0 12px;
+        font-size: 12px;
+      }
+
       /* UI 단계별 숨기기 버튼: 모바일에서만 라이트/다크 버튼 옆에 노출 */
       .ui-hide-toggle-btn {
         display: flex !important;
@@ -3530,7 +3548,7 @@ body.rm-mobile-mode .wild-charmander-wrapper{z-index:10010!important}
 :root{--rm-bg:#09090d;--rm-surface:#17171e;--rm-text:#f7f7fa;--rm-sub:#a7a7b3;--rm-accent:#fc6fcf;--rm-accent2:#8b7cff;--rm-line:rgba(255,255,255,.08)}
 body.light-mode{--rm-bg:#f7f7fa;--rm-surface:#eeeef4;--rm-text:#17171d;--rm-sub:#777784;--rm-line:rgba(0,0,0,.08)}
 body{display:block!important;min-height:100dvh!important;padding:0!important;overflow-x:hidden!important;overflow-y:auto!important;background:var(--rm-bg)!important}
-body:not(.rm-device-desktop) .player-wrapper,body:not(.rm-device-desktop) .theme-toggle-row,body:not(.rm-device-desktop) .wallpaper-controls,body:not(.rm-device-desktop) #pokeball-spawn-btn,body:not(.rm-device-desktop) #captured-list-btn,body:not(.rm-device-desktop) #captured-list-panel,body:not(.rm-device-desktop) #wild-toggle-btn,body:not(.rm-device-desktop) #photocard-gacha-btn,body:not(.rm-device-desktop) #mobile-bottom-nav,body:not(.rm-device-desktop) #mobile-mini-player,body:not(.rm-device-desktop) #mobile-home-view{display:none!important}
+body:not(.rm-device-desktop) .player-wrapper,body:not(.rm-device-desktop) .theme-toggle-row,body:not(.rm-device-desktop) .wallpaper-controls,body:not(.rm-device-desktop) #pokeball-spawn-btn,body:not(.rm-device-desktop) #captured-list-btn,body:not(.rm-device-desktop) #captured-list-panel,body:not(.rm-device-desktop) #wild-toggle-btn,body:not(.rm-device-desktop) #photocard-gacha-btn,body:not(.rm-device-desktop) #rg-launch-btn,body:not(.rm-device-desktop) #mobile-bottom-nav,body:not(.rm-device-desktop) #mobile-mini-player,body:not(.rm-device-desktop) #mobile-home-view{display:none!important}
 #rm-mobile-app{display:flex;position:relative;overflow-x:hidden;z-index:10000;min-height:100dvh;flex-direction:column;background:radial-gradient(circle at 90% -10%,rgba(252,111,207,.18),transparent 35%),radial-gradient(circle at -10% 35%,rgba(139,124,255,.14),transparent 30%),var(--rm-bg);color:var(--rm-text);padding-bottom:calc(76px + env(safe-area-inset-bottom))}
 .rm-page{display:none;min-height:calc(100dvh - 76px);padding:18px 18px 110px}.rm-page.is-active{display:block}#rm-search-page{background:var(--rm-bg)}.rm-page.rm-slide{position:absolute;top:0;left:0;right:0;z-index:2;will-change:transform}
 .rm-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}.rm-brand{display:flex;align-items:center;gap:10px}.rm-brand-mark{width:34px;height:34px;border-radius:10px;object-fit:cover}.rm-brand-title{font-size:19px;font-weight:800;letter-spacing:-.5px}.rm-brand-sub{margin-top:2px;color:var(--rm-sub);font-size:10px}
@@ -3643,6 +3661,7 @@ body.rm-device-mobile #captured-list-btn,
 body.rm-device-mobile #captured-list-panel,
 body.rm-device-mobile #wild-toggle-btn,
 body.rm-device-mobile #photocard-gacha-btn,
+body.rm-device-mobile #rg-launch-btn,
 body.rm-device-mobile #mobile-bottom-nav,
 body.rm-device-mobile #mobile-mini-player,
 body.rm-device-mobile #mobile-home-view{display:none!important}
@@ -3786,8 +3805,8 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
       <div class="mv-modal-head">
         <span class="mv-modal-title">🎬 RESCENE 뮤직비디오</span>
         <div class="mv-sort-row">
-          <button id="mv-sort-date-btn" class="mv-sort-btn active" data-sort="date">날짜순</button>
-          <button id="mv-sort-views-btn" class="mv-sort-btn" data-sort="views">조회수순</button>
+          <button id="mv-sort-date-btn" class="mv-sort-btn active" data-dir="desc">날짜순 <span class="mv-sort-arrow">▼</span></button>
+          <button id="mv-sort-views-btn" class="mv-sort-btn" data-dir="desc">조회수순 <span class="mv-sort-arrow">▼</span></button>
         </div>
       </div>
       <div id="mv-player-area" class="mv-player-area">
@@ -3797,7 +3816,7 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
     </div>
   </div>
   <script>
-    (function(){
+    document.addEventListener('DOMContentLoaded', function(){
       var mvData = [
         { title: "LOVE ATTACK", date: "2024.08.19", id: "9XttLI0oH0I" },
         { title: "Runaway", date: "2026.03.30", id: "rsZwrTNklos" },
@@ -3812,7 +3831,9 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
       ];
       var viewCache = {}; // id -> {text, num} or null(조회 실패)
       var viewsLoading = false;
-      var currentSort = 'date';
+      var currentSortType = 'date'; // 'date' | 'views'
+      var dateDir = 'desc';  // 'desc'=최신순, 'asc'=오래된순
+      var viewsDir = 'desc'; // 'desc'=높은순, 'asc'=낮은순
 
       var modalBg = document.getElementById('mv-modal-bg');
       var openBtn = document.getElementById('mv-view-btn');
@@ -3823,20 +3844,33 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
       var sortDateBtn = document.getElementById('mv-sort-date-btn');
       var sortViewsBtn = document.getElementById('mv-sort-views-btn');
 
+      if (!openBtn || !modalBg) return; // 안전장치: 요소가 없으면 조용히 종료
+
       function dateToNum(d) { return parseInt(d.replace(/\./g, ''), 10); }
 
       function sortedList() {
         var arr = mvData.slice();
-        if (currentSort === 'views') {
+        if (currentSortType === 'views') {
+          var vdir = viewsDir === 'desc' ? -1 : 1;
           arr.sort(function(a, b) {
             var av = viewCache[a.id] && viewCache[a.id].num != null ? viewCache[a.id].num : -1;
             var bv = viewCache[b.id] && viewCache[b.id].num != null ? viewCache[b.id].num : -1;
-            return bv - av;
+            return (av - bv) * vdir;
           });
         } else {
-          arr.sort(function(a, b) { return dateToNum(b.date) - dateToNum(a.date); });
+          var ddir = dateDir === 'asc' ? 1 : -1;
+          arr.sort(function(a, b) { return (dateToNum(a.date) - dateToNum(b.date)) * ddir; });
         }
         return arr;
+      }
+
+      function updateSortBtnLabels() {
+        sortDateBtn.querySelector('.mv-sort-arrow').textContent = dateDir === 'desc' ? '▼' : '▲';
+        sortDateBtn.title = dateDir === 'desc' ? '최신날짜순' : '오래된날짜순';
+        sortViewsBtn.querySelector('.mv-sort-arrow').textContent = viewsDir === 'desc' ? '▼' : '▲';
+        sortViewsBtn.title = viewsDir === 'desc' ? '조회수 높은순' : '조회수 낮은순';
+        sortDateBtn.classList.toggle('active', currentSortType === 'date');
+        sortViewsBtn.classList.toggle('active', currentSortType === 'views');
       }
 
       function viewsText(id) {
@@ -3918,19 +3952,28 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
       });
       backBtn.addEventListener('click', stopMv);
 
+      // 같은 버튼을 다시 누르면 방향(오름/내림차순)이 토글되고,
+      // 다른 정렬 기준 버튼을 누르면 그 기준으로 전환된다(방향은 유지).
       sortDateBtn.addEventListener('click', function() {
-        currentSort = 'date';
-        sortDateBtn.classList.add('active');
-        sortViewsBtn.classList.remove('active');
+        if (currentSortType === 'date') {
+          dateDir = dateDir === 'desc' ? 'asc' : 'desc';
+        } else {
+          currentSortType = 'date';
+        }
+        updateSortBtnLabels();
         renderList();
       });
       sortViewsBtn.addEventListener('click', function() {
-        currentSort = 'views';
-        sortViewsBtn.classList.add('active');
-        sortDateBtn.classList.remove('active');
+        if (currentSortType === 'views') {
+          viewsDir = viewsDir === 'desc' ? 'asc' : 'desc';
+        } else {
+          currentSortType = 'views';
+        }
+        updateSortBtnLabels();
         renderList();
       });
-    })();
+      updateSortBtnLabels();
+    });
   </script>
 
   <!-- 야생 파이리 이스터에그 on/off 토글 버튼 -->
@@ -4013,7 +4056,7 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
     </button>
     <!-- 라이트/다크 모드 버튼 오른쪽: 뮤비 보기 버튼 -->
     <button id="mv-view-btn" class="theme-toggle-btn mv-view-btn">
-      <span>🎬</span>
+      <span>🎬</span><span>뮤비</span>
     </button>
     <!-- 모바일 전용: PC의 Q 단축키와 동일하게 UI를 단계별로 숨기는 버튼.
          데스크탑에서는 키보드 단축키가 있으므로 숨겨두고, 768px 이하 모바일 화면에서만 노출한다. -->
