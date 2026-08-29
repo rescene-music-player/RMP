@@ -622,9 +622,9 @@
       position: relative;
       width: min(820px, 100%);
       height: min(880px, 92vh);
-      background-color: rgba(18, 22, 28, 0.22);
-      backdrop-filter: blur(26px) saturate(180%);
-      -webkit-backdrop-filter: blur(26px) saturate(180%);
+      background-color: rgba(18, 22, 28, 0.12);
+      backdrop-filter: blur(10px) saturate(160%);
+      -webkit-backdrop-filter: blur(10px) saturate(160%);
       border: 1px solid rgba(255, 255, 255, 0.25);
       border-radius: 20px;
       overflow: hidden;
@@ -752,13 +752,13 @@
     }
 
     body.light-mode .mv-modal-wrap {
-      background: rgba(255, 255, 255, 0.14);
+      background: rgba(255, 255, 255, 0.10);
       border: 1px solid rgba(255, 255, 255, 0.85);
       box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08),
                   inset 0 0 20px rgba(255, 255, 255, 0.45),
                   inset 0 1px 0 rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(36px) saturate(220%);
-      -webkit-backdrop-filter: blur(36px) saturate(220%);
+      backdrop-filter: blur(14px) saturate(180%);
+      -webkit-backdrop-filter: blur(14px) saturate(180%);
     }
     body.light-mode .mv-modal-head {
       color: #222;
@@ -900,6 +900,15 @@
       background: linear-gradient(to bottom, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0));
       pointer-events: none;
       z-index: -1;
+    }
+
+    /* 라이트/다크 모드 전환 시, backdrop-filter(블러)가 걸린 카드들이 여러 개
+       동시에 background/box-shadow 트랜지션을 타면서 매 프레임 블러를 다시
+       합성(recomposite)해야 해서 프레임이 끊기는 버그가 있었다.
+       테마를 바꾸는 순간에는 모든 트랜지션을 잠깐 꺼서(즉시 전환) 이 버벅임을 없앤다. */
+    body.theme-switching,
+    body.theme-switching * {
+      transition: none !important;
     }
 
     /* ----------------------------------
@@ -3879,7 +3888,8 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
         { title: "New World", date: "2024.09.11", id: "QNXeGm-Wkms" },
         { title: "Glow Up", date: "2025.01.23", id: "h0xUtrb_JBc" },
         { title: "YoYo (Performance ver.)", date: "2024.05.05", id: "bhgNiT3qQgU" },
-        { title: "Deja Vu", date: "2025.06.17", id: "ZbO9PBdFRdc" }
+        { title: "Deja Vu", date: "2025.06.17", id: "ZbO9PBdFRdc" },
+        { title: "Pretty Girl Special Video", date: "2026.07.02", id: "qZlu2j2SiBA" }
       ];
       var viewCache = {}; // id -> {text, num} or null(조회 실패)
       var viewsLoading = false;
@@ -9023,6 +9033,9 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
       themeToggleBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         isLightMode = !isLightMode;
+        // 블러 카드들의 트랜지션이 동시에 돌면서 생기는 프레임 끊김을 막기 위해,
+        // 전환 순간에는 모든 트랜지션을 잠깐 끈 채로 즉시 색을 바꾼다.
+        document.body.classList.add('theme-switching');
         if (isLightMode) {
           document.body.classList.add('light-mode');
           themeIcon.innerText = '☀️';
@@ -9030,6 +9043,11 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
           document.body.classList.remove('light-mode');
           themeIcon.innerText = '🌙';
         }
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            document.body.classList.remove('theme-switching');
+          });
+        });
       });
     }
 
