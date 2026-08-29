@@ -6109,7 +6109,7 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
     function saveViewCountsCache() {
       try { localStorage.setItem('rescene_yt_view_counts', JSON.stringify(viewCountsCache)); } catch (e) {}
     }
-    const VIEW_COUNT_CACHE_MS = 6 * 60 * 60 * 1000; // 6시간 지나면 다시 불러옴(할당량 절약)
+    const VIEW_COUNT_CACHE_MS = 1 * 60 * 60 * 1000; // 1시간 지나면 다시 불러옴(방문자 수가 적어 할당량 여유 있음)
     let viewsRenderRequestId = 0; // 조회수 로딩 도중 다른 카테고리로 바뀌면 이전 요청 결과를 무시하기 위한 값
 
     function getYoutubeApiKey() {
