@@ -5758,7 +5758,8 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
       ['저스티스박테리아', 'justicebacteria'], ['정의균', 'justicebacteria'],
       ['하이어', 'higher'],
       ['새드송', 'sad song'], ['새드 송', 'sad song'],
-      ['제인도', 'jane doe'], ['제인 도', 'jane doe']
+      ['제인도', 'jane doe'], ['제인 도', 'jane doe'],
+      ['비지보이', 'busy boy'], ['비지 보이', 'busy boy']
     ];
     // 영어 트랙 제목을 한글 발음으로 검색해도 찾을 수 있도록 하는 단어 단위
     // 별칭 테이블. [한글 발음, 영어 단어(붙여쓰기)] 쌍으로 등록해두면,
@@ -5979,7 +5980,12 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
     function searchRelevanceSort(list, query) {
       return list
         .map((x, i) => ({ x, i, o: isOfficialRelease(x), r: searchRelevanceRank(x, query) }))
-        .sort((a, b) => (a.o - b.o) || (a.r - b.r) || (a.i - b.i))
+        // 같은 순위(예: 둘 다 startsWith)일 때는 곡 제목이 더 짧은(=검색어에
+        // 더 가까운) 쪽이 위로 오게 한다. "busy" 검색 시 "Busy Boy"가
+        // "Busy Boy Galantis Remix"보다 먼저 나와야 하는데, 둘 다 startsWith라
+        // 동률이 되면서 최신 발매일 순(원래 목록 순서)이 우선돼 리믹스가
+        // 위로 가버리는 문제가 있었다.
+        .sort((a, b) => (a.o - b.o) || (a.r - b.r) || ((a.x.track.name || '').length - (b.x.track.name || '').length) || (a.i - b.i))
         .map(o => o.x);
     }
     // 현재 재생 중인 트랙이 "자주 들은 곡"으로 이미 카운트됐는지 여부.
