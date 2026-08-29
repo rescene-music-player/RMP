@@ -1091,6 +1091,38 @@
       margin-bottom: 6px;
     }
 
+    /* (변경) 트랙리스트 제목은 "TRACKLIST - 앨범명"처럼 한 줄에 이어붙이지
+       않고, "TRACKLIST" 아래에 줄을 바꿔서 앨범/카테고리 이름을 따로
+       보여준다. 이 이름이 한 줄이든 두 줄이든(줄바꿈되든) 항상 "두 줄
+       높이"만큼 미리 여백을 확보해둬서, 어떤 앨범을 선택하든 트랙리스트
+       UI 박스 크기가 절대 바뀌지 않게 고정한다(두 줄을 넘는 경우는
+       말줄임표로 자른다).
+    ---------------------------------- */
+    .tracklist-subtitle {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: normal;
+      word-break: break-word;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      color: #9aa1ac;
+      line-height: 1.35;
+      height: calc(1.35em * 2);
+      margin-top: 3px;
+    }
+
+    body.light-mode .tracklist-subtitle {
+      color: #6b7280;
+    }
+
+    #tracklist-title {
+      white-space: normal;
+    }
+
     .tracklist-count {
       font-size: 11px;
       font-weight: 600;
@@ -4241,7 +4273,10 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
       <!-- 트랙리스트 카드 -->
       <div class="card-box draggable-panel" id="panel-tracklist">
         <div class="tracklist-count" id="tracklist-count"></div>
-        <div class="section-title panel-drag-handle panel-collapse-header" id="tracklist-title">TRACKLIST</div>
+        <div class="section-title panel-drag-handle panel-collapse-header" id="tracklist-title">
+          TRACKLIST
+          <div class="tracklist-subtitle" id="tracklist-subtitle"></div>
+        </div>
         <div class="tracklist-box">
           <ul id="track-list">
             <li class="track-placeholder">상단 ALBUM SELECT에서 앨범을 선택해주세요.</li>
@@ -9912,6 +9947,15 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
       requestAnimationFrame(fitTracklistToThreeRows);
     }
 
+    // "TRACKLIST" 라벨 아래에 표시되는 부제목(현재 보고 있는 앨범/카테고리
+    // 이름)만 갱신한다. "TRACKLIST" 라벨 자체는 항상 그대로 두고, 부제목
+    // 영역은 CSS에서 이미 "두 줄 높이"만큼 고정 확보돼 있어서 어떤 이름이
+    // 들어와도 트랙리스트 박스 크기가 바뀌지 않는다.
+    function setTracklistSubtitle(text) {
+      const el = document.getElementById('tracklist-subtitle');
+      if (el) el.textContent = text || '';
+    }
+
     function renderTrackListUIImpl() {
       const trackListUl = document.getElementById('track-list');
       const tracklistTitle = document.getElementById('tracklist-title');
@@ -9921,7 +9965,7 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
       viewsRenderRequestId++; // 목록을 새로 그릴 때마다 값을 올려서, 그 사이 끝나는 이전 조회수 로딩 결과는 무시한다.
 
       if (isShowingFavoritesOnly || activeCategory === 'favorite') {
-        if (tracklistTitle) tracklistTitle.innerText = 'TRACKLIST - 좋아요 목록';
+        setTracklistSubtitle('좋아요 목록');
         
         let favList = favoriteTracks.map(k => findTrackByKey(k)).filter(item => item !== null);
 
@@ -9956,7 +10000,7 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
 
       if (!selectedAlbum) {
         const catName = activeCategory.toUpperCase();
-        if (tracklistTitle) tracklistTitle.innerText = `TRACKLIST - ${catName} 전체`;
+        setTracklistSubtitle(`${catName} 전체`);
 
         let allCatTracks = getAllTracksByCategory(activeCategory);
 
@@ -9984,7 +10028,7 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
         return;
       }
 
-      if (tracklistTitle) tracklistTitle.innerText = `TRACKLIST - ${selectedAlbum.title}`;
+      setTracklistSubtitle(selectedAlbum.title);
 
       let albumTracks = selectedAlbum.tracks.map((track, trackIdx) => ({
         albumIdx: albums.findIndex(a => a.id === selectedAlbum.id),
@@ -10019,7 +10063,7 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
     // "조회수" 카테고리 전용: 전체 음원의 유튜브 조회수를 불러와 높은 순으로 정렬해서 보여준다.
     async function renderViewsTrackListUI(trackListUl, tracklistTitle, tracklistCount) {
       const myRequestId = viewsRenderRequestId; // renderTrackListUIImpl에서 이미 ++된 현재 값을 그대로 기록
-      if (tracklistTitle) tracklistTitle.innerText = 'TRACKLIST - 조회수 높은 순';
+      setTracklistSubtitle('조회수 높은 순');
       if (tracklistCount) tracklistCount.textContent = '';
 
       const apiKey = getYoutubeApiKey();
