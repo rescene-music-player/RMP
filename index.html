@@ -5960,12 +5960,16 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
       const name = (item.track.name || '').toLowerCase();
       const includeAlbum = ['single', 'ep', 'ost', 'featuring'].includes(item.album.type);
       const album = includeAlbum ? (item.album.title || '').toLowerCase() : '';
-      if (name.startsWith(query)) return 0;
-      if (name.includes(' ' + query)) return 1;
-      if (name.includes(query)) return 2;
-      if (includeAlbum && album.startsWith(query)) return 3;
-      if (includeAlbum && album.includes(query)) return 4;
-      return 5; // 별칭/영한 발음 매칭 등으로만 걸린 경우
+      // 곡 제목이 검색어와 정확히 일치하는 경우(예: "busy boy" 검색 시
+      // "Busy Boy"는 0순위, "Busy Boy Galantis Remix"처럼 검색어로 시작만
+      // 하는 곡은 그 아래로 가야 한다) 최우선으로 올린다.
+      if (name === query) return 0;
+      if (name.startsWith(query)) return 1;
+      if (name.includes(' ' + query)) return 2;
+      if (name.includes(query)) return 3;
+      if (includeAlbum && album.startsWith(query)) return 4;
+      if (includeAlbum && album.includes(query)) return 5;
+      return 6; // 별칭/영한 발음 매칭 등으로만 걸린 경우
     }
     // 공식 음원(싱글/EP/OST/피처링)이 커버/기타 음원보다 항상 검색 결과 위쪽에
     // 오도록 하는 우선순위. 숫자가 작을수록 위로 온다.
@@ -10056,6 +10060,7 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
           allCatTracks = allCatTracks.filter(item => 
             trackMatchesSearch(item, searchQuery)
           );
+          allCatTracks = searchRelevanceSort(allCatTracks, searchQuery);
         }
 
         if (tracklistCount) tracklistCount.textContent = `총 ${allCatTracks.length}곡`;
