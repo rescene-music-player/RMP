@@ -181,12 +181,13 @@
     ---------------------------------- */
     .captured-list-btn {
       left: 68px;
+      bottom: 68px;
       font-size: 20px;
     }
 
-    /* 포토카드 뽑기 버튼: 포획 버튼 옆에 같은 줄로 배치 */
+    /* 포토카드 뽑기 버튼: 파이리(몬스터볼) 버튼 옆, 기존 가방 버튼 자리로 이동 */
     .photocard-gacha-btn {
-      left: 120px;
+      left: 68px;
       font-size: 19px;
     }
 
@@ -581,6 +582,178 @@
     .ui-hide-toggle-btn {
       display: none;
     }
+
+    /* 라이트/다크 모드 버튼 오른쪽에 위치하는 뮤비 보기 버튼 (데스크탑: 테마 버튼 옆에 고정) */
+    .mv-view-btn {
+      left: 89px;
+      font-size: 17px;
+    }
+
+    /* ----------------------------------
+       뮤비 보기 모달
+    ---------------------------------- */
+    .mv-modal-bg {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: rgba(6, 4, 12, 0.82);
+      backdrop-filter: blur(4px);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .mv-modal-bg.show { display: flex; }
+
+    .mv-modal-wrap {
+      position: relative;
+      width: min(820px, 100%);
+      height: min(880px, 92vh);
+      background: rgba(18, 22, 28, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 30px 80px -20px rgba(0,0,0,0.7);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .mv-modal-close-btn {
+      position: absolute;
+      top: -14px;
+      right: -14px;
+      z-index: 3;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.3);
+      background: rgba(12,10,22,0.9);
+      backdrop-filter: blur(8px);
+      color: #f4eefb;
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 18px -4px rgba(0,0,0,0.6);
+    }
+    .mv-modal-close-btn:hover { background: rgba(12,10,22,1); }
+
+    .mv-modal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .mv-modal-title { font-size: 15px; font-weight: 700; }
+
+    .mv-sort-row { display: flex; gap: 6px; }
+    .mv-sort-btn {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.25);
+      color: #ddd;
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-size: 12px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .mv-sort-btn.active {
+      background: rgba(252, 111, 207, 0.3);
+      border-color: #FC6FCF;
+      color: #fff;
+    }
+
+    .mv-player-area {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000;
+      flex-shrink: 0;
+      display: none;
+    }
+    .mv-player-area.show { display: block; }
+    .mv-player-area iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .mv-player-back-btn {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      z-index: 2;
+      background: rgba(12,10,22,0.75);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: #fff;
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .mv-list {
+      overflow-y: auto;
+      flex: 1;
+      padding: 8px;
+    }
+    .mv-list-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 8px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+    .mv-list-item:hover { background: rgba(255,255,255,0.08); }
+    .mv-list-thumb {
+      width: 110px;
+      height: 62px;
+      border-radius: 8px;
+      object-fit: cover;
+      flex-shrink: 0;
+      background: #222;
+    }
+    .mv-list-info { min-width: 0; flex: 1; }
+    .mv-list-title {
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .mv-list-meta {
+      color: rgba(255,255,255,0.6);
+      font-size: 12px;
+      margin-top: 4px;
+      display: flex;
+      gap: 8px;
+    }
+
+    body.light-mode .mv-modal-wrap {
+      background: rgba(255,255,255,0.96);
+      border-color: rgba(0,0,0,0.1);
+    }
+    body.light-mode .mv-modal-head {
+      color: #222;
+      border-bottom-color: rgba(0,0,0,0.08);
+    }
+    body.light-mode .mv-sort-btn {
+      background: rgba(0,0,0,0.05);
+      border-color: rgba(0,0,0,0.2);
+      color: #444;
+    }
+    body.light-mode .mv-list-item:hover { background: rgba(0,0,0,0.06); }
+    body.light-mode .mv-list-title { color: #222; }
+    body.light-mode .mv-list-meta { color: rgba(0,0,0,0.5); }
 
     /* 테마 토글 버튼 바로 아래에 정렬되는 배경화면 컨트롤 영역
        1행: 🖼️배경화면 버튼 + 🔒 잠금 버튼
@@ -3606,6 +3779,160 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
     })();
   </script>
 
+  <!-- 뮤비 보기 모달 -->
+  <div id="mv-modal-bg" class="mv-modal-bg">
+    <div class="mv-modal-wrap">
+      <button id="mv-modal-close-btn" class="mv-modal-close-btn" title="닫기">✕</button>
+      <div class="mv-modal-head">
+        <span class="mv-modal-title">🎬 RESCENE 뮤직비디오</span>
+        <div class="mv-sort-row">
+          <button id="mv-sort-date-btn" class="mv-sort-btn active" data-sort="date">날짜순</button>
+          <button id="mv-sort-views-btn" class="mv-sort-btn" data-sort="views">조회수순</button>
+        </div>
+      </div>
+      <div id="mv-player-area" class="mv-player-area">
+        <button id="mv-player-back-btn" class="mv-player-back-btn">‹ 목록으로</button>
+      </div>
+      <div id="mv-list" class="mv-list"></div>
+    </div>
+  </div>
+  <script>
+    (function(){
+      var mvData = [
+        { title: "LOVE ATTACK", date: "2024.08.19", id: "9XttLI0oH0I" },
+        { title: "Runaway", date: "2026.03.30", id: "rsZwrTNklos" },
+        { title: "UhUh", date: "2024.03.18", id: "zpSejlkSXLA" },
+        { title: "Pinball", date: "2024.09.11", id: "B8JJ8RNM-60" },
+        { title: "Bloom", date: "2025.11.20", id: "MC6-82GRK5I" },
+        { title: "Heart Drop", date: "2025.10.28", id: "ByX8EZq8500" },
+        { title: "New World", date: "2024.09.11", id: "QNXeGm-Wkms" },
+        { title: "Glow Up", date: "2025.01.23", id: "h0xUtrb_JBc" },
+        { title: "YoYo (Performance ver.)", date: "2024.05.05", id: "bhgNiT3qQgU" },
+        { title: "Deja Vu", date: "2025.06.17", id: "ZbO9PBdFRdc" }
+      ];
+      var viewCache = {}; // id -> {text, num} or null(조회 실패)
+      var viewsLoading = false;
+      var currentSort = 'date';
+
+      var modalBg = document.getElementById('mv-modal-bg');
+      var openBtn = document.getElementById('mv-view-btn');
+      var closeBtn = document.getElementById('mv-modal-close-btn');
+      var listEl = document.getElementById('mv-list');
+      var playerArea = document.getElementById('mv-player-area');
+      var backBtn = document.getElementById('mv-player-back-btn');
+      var sortDateBtn = document.getElementById('mv-sort-date-btn');
+      var sortViewsBtn = document.getElementById('mv-sort-views-btn');
+
+      function dateToNum(d) { return parseInt(d.replace(/\./g, ''), 10); }
+
+      function sortedList() {
+        var arr = mvData.slice();
+        if (currentSort === 'views') {
+          arr.sort(function(a, b) {
+            var av = viewCache[a.id] && viewCache[a.id].num != null ? viewCache[a.id].num : -1;
+            var bv = viewCache[b.id] && viewCache[b.id].num != null ? viewCache[b.id].num : -1;
+            return bv - av;
+          });
+        } else {
+          arr.sort(function(a, b) { return dateToNum(b.date) - dateToNum(a.date); });
+        }
+        return arr;
+      }
+
+      function viewsText(id) {
+        if (!viewCache[id]) return '조회수 불러오는 중…';
+        if (viewCache[id].num == null) return '조회수 확인 불가';
+        return '조회수 ' + viewCache[id].text + '회';
+      }
+
+      function renderList() {
+        var arr = sortedList();
+        listEl.innerHTML = '';
+        arr.forEach(function(mv) {
+          var item = document.createElement('div');
+          item.className = 'mv-list-item';
+          item.innerHTML =
+            '<img class="mv-list-thumb" src="https://i.ytimg.com/vi/' + mv.id + '/hqdefault.jpg" alt="' + mv.title + '">' +
+            '<div class="mv-list-info">' +
+              '<div class="mv-list-title">' + mv.title + '</div>' +
+              '<div class="mv-list-meta"><span>' + mv.date + '</span><span class="mv-view-count" data-id="' + mv.id + '">' + viewsText(mv.id) + '</span></div>' +
+            '</div>';
+          item.addEventListener('click', function() { playMv(mv); });
+          listEl.appendChild(item);
+        });
+      }
+
+      function playMv(mv) {
+        playerArea.querySelectorAll('iframe').forEach(function(f){ f.remove(); });
+        var iframe = document.createElement('iframe');
+        iframe.src = 'https://www.youtube.com/embed/' + mv.id + '?autoplay=1&rel=0';
+        iframe.allow = 'autoplay; encrypted-media; picture-in-picture';
+        iframe.allowFullscreen = true;
+        playerArea.appendChild(iframe);
+        playerArea.classList.add('show');
+      }
+
+      function stopMv() {
+        playerArea.classList.remove('show');
+        playerArea.querySelectorAll('iframe').forEach(function(f){ f.remove(); });
+      }
+
+      // 조회수는 사이트에 이미 구축된 유튜브 Data API 프록시(rmp-worker)를 그대로 사용한다.
+      // (카테고리 화면의 "👁️ 조회수" 정렬과 동일한 fetchViewCounts/viewCountsData 재사용)
+      function loadViews() {
+        if (viewsLoading) return;
+        viewsLoading = true;
+        var ids = mvData.map(function(mv){ return mv.id; });
+        if (typeof fetchViewCounts !== 'function') {
+          mvData.forEach(function(mv){ viewCache[mv.id] = { num: null, text: '' }; });
+          renderList();
+          return;
+        }
+        fetchViewCounts(ids, getYoutubeApiKey()).then(function(result) {
+          mvData.forEach(function(mv) {
+            var v = viewCountsData[mv.id];
+            if (v != null) {
+              viewCache[mv.id] = { num: v, text: v.toLocaleString('ko-KR') };
+            } else {
+              viewCache[mv.id] = { num: null, text: '' };
+            }
+          });
+          renderList();
+        }).catch(function() {
+          mvData.forEach(function(mv){ viewCache[mv.id] = { num: null, text: '' }; });
+          renderList();
+        });
+      }
+
+      openBtn.addEventListener('click', function() {
+        modalBg.classList.add('show');
+        renderList();
+        loadViews();
+      });
+      closeBtn.addEventListener('click', function() {
+        modalBg.classList.remove('show');
+        stopMv();
+      });
+      modalBg.addEventListener('click', function(e) {
+        if (e.target === modalBg) { modalBg.classList.remove('show'); stopMv(); }
+      });
+      backBtn.addEventListener('click', stopMv);
+
+      sortDateBtn.addEventListener('click', function() {
+        currentSort = 'date';
+        sortDateBtn.classList.add('active');
+        sortViewsBtn.classList.remove('active');
+        renderList();
+      });
+      sortViewsBtn.addEventListener('click', function() {
+        currentSort = 'views';
+        sortViewsBtn.classList.add('active');
+        sortDateBtn.classList.remove('active');
+        renderList();
+      });
+    })();
+  </script>
+
   <!-- 야생 파이리 이스터에그 on/off 토글 버튼 -->
   <button id="wild-toggle-btn" class="pokeball-spawn-btn wild-toggle-btn" title="야생 파이리 이스터에그 켜기/끄기">
     <img src="POKEMON/포획된파이리.png" alt="야생 파이리" class="pokeball-spawn-btn-icon">
@@ -3683,6 +4010,10 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
   <div class="theme-toggle-row">
     <button id="theme-toggle-btn" class="theme-toggle-btn">
       <span id="theme-icon">☀️</span>
+    </button>
+    <!-- 라이트/다크 모드 버튼 오른쪽: 뮤비 보기 버튼 -->
+    <button id="mv-view-btn" class="theme-toggle-btn mv-view-btn">
+      <span>🎬</span>
     </button>
     <!-- 모바일 전용: PC의 Q 단축키와 동일하게 UI를 단계별로 숨기는 버튼.
          데스크탑에서는 키보드 단축키가 있으므로 숨겨두고, 768px 이하 모바일 화면에서만 노출한다. -->
@@ -4478,7 +4809,7 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
           { name: "눈의 꽃(雪の華) 미나미 - 원곡: 나카시마 미카 - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "0:48", trimStart: 835.3, trimEnd: 883 },
           { name: "안녕 (Hello) 리브 - 원곡: 박혜경,조이 - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "0:29", trimStart: 883, trimEnd: 912 },
           { name: "밤이 되니까 제나 - 원곡: 펀치 - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "0:22", trimStart: 912, trimEnd: 934 },
-          { name: "Roller Coaster 미나미 - 원곡: 청하 - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "0:31", trimStart: 934.2, trimEnd: 965 },
+          { name: "Roller Coaster 미나미 - 원곡: 청하 - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "0:30", trimStart: 934.2, trimEnd: 964.2 },
           { name: "하늘 아래서 리브 - 원곡: 여자친구 - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "0:18", trimStart: 965, trimEnd: 983 },
           { name: "아니길 (Hope Not) 제나 - 원곡: BLACKPINK - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "0:34", trimStart: 983.3, trimEnd: 1017 },
           { name: "Attention 미나미 - 원곡: Charlie Puth(찰리 푸스) - 먼키의 발자국 Live", src: "qr6_VLHZ7ik", duration: "0:40", trimStart: 1017, trimEnd: 1057 },
@@ -13392,7 +13723,7 @@ function initRM(){
    const order=['home','search','more'];
    const appRoot=document.getElementById('rm-mobile-app');
    if(!appRoot) return;
-   const noSwipeSelector='.rm-chip-row,.category-buttons,.wallpaper-grid,.rm-video-list,.tracklist-box,.album-select-box,input,textarea,.rm-range,input[type="range"]';
+   const noSwipeSelector='.rm-chip-row,.category-buttons,.wallpaper-grid,.rm-video-list,.tracklist-box,.album-select-box,input,textarea,.rm-range,input[type="range"],.rm-carousel';
    let sx=0,sy=0,tracking=false;
    appRoot.addEventListener('touchstart',(e)=>{
      if(document.body.classList.contains('rm-sheet-open'))return;
