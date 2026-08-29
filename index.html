@@ -5439,7 +5439,13 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
     currentPlaylist = currentPlaylist.map((item) => {
       if (!item || !item.album || !item.track) return item;
       const liveAlbum = albums.find(a => a.id === item.album.id);
-      const liveTrack = liveAlbum && liveAlbum.tracks.find(t => t.src === item.track.src);
+      // (버그 수정) "먼키의 발자국 Live"처럼 한 유튜브 영상(src) 안에 여러 곡이
+      // 구간만 다르게 잘려 들어있는 앨범은 track.src가 전부 똑같다. 그래서
+      // src만으로 트랙을 찾으면 항상 그 앨범의 "첫 번째" 트랙(Love Attack
+      // Acoustic Ver.)만 찾아져서, 새로고침하면 재생목록에 담아둔 24곡이
+      // 전부 그 한 곡으로 바뀌어버렸다. track.name까지 같이 비교해서 정확히
+      // 그 트랙을 찾도록 한다.
+      const liveTrack = liveAlbum && liveAlbum.tracks.find(t => t.src === item.track.src && t.name === item.track.name);
       if (liveAlbum && liveTrack) {
         return { album: liveAlbum, track: liveTrack };
       }
