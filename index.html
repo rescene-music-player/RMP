@@ -627,9 +627,7 @@
     }
 
     .mv-modal-close-btn {
-      position: absolute;
-      top: -14px;
-      right: -14px;
+      position: static;
       z-index: 3;
       width: 34px;
       height: 34px;
@@ -643,6 +641,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      flex-shrink: 0;
       box-shadow: 0 6px 18px -4px rgba(0,0,0,0.6);
     }
     .mv-modal-close-btn:hover { background: rgba(12,10,22,1); }
@@ -660,7 +659,9 @@
     }
     .mv-modal-title { font-size: 15px; font-weight: 700; }
 
-    .mv-sort-row { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+    .mv-modal-head-right { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+    .mv-sort-row { display: flex; gap: 6px; flex-wrap: wrap; }
     .mv-sort-btn {
       background: rgba(255,255,255,0.08);
       border: 1px solid rgba(255,255,255,0.25);
@@ -3801,12 +3802,14 @@ body.rm-device-mobile #mobile-home-view{display:none!important}
   <!-- 뮤비 보기 모달 -->
   <div id="mv-modal-bg" class="mv-modal-bg">
     <div class="mv-modal-wrap">
-      <button id="mv-modal-close-btn" class="mv-modal-close-btn" title="닫기">✕</button>
       <div class="mv-modal-head">
         <span class="mv-modal-title">🎬 RESCENE 뮤직비디오</span>
-        <div class="mv-sort-row">
-          <button id="mv-sort-date-btn" class="mv-sort-btn active" data-dir="desc">날짜순 <span class="mv-sort-arrow">▼</span></button>
-          <button id="mv-sort-views-btn" class="mv-sort-btn" data-dir="desc">조회수순 <span class="mv-sort-arrow">▼</span></button>
+        <div class="mv-modal-head-right">
+          <div class="mv-sort-row">
+            <button id="mv-sort-date-btn" class="mv-sort-btn active" data-dir="desc">날짜순 <span class="mv-sort-arrow">▼</span></button>
+            <button id="mv-sort-views-btn" class="mv-sort-btn" data-dir="desc">조회수순 <span class="mv-sort-arrow">▼</span></button>
+          </div>
+          <button id="mv-modal-close-btn" class="mv-modal-close-btn" title="닫기">✕</button>
         </div>
       </div>
       <div id="mv-player-area" class="mv-player-area">
